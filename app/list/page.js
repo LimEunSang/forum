@@ -15,6 +15,9 @@ export default async function List() {
             <Link prefetch={false} href={"/detail/" + object._id}>
               <h4>{object.title}</h4>
             </Link>
+            <Link prefetch={false} href={"/edit/" + object._id}>
+              📝
+            </Link>
             <DetailLink />
             <p>1월 1일</p>
           </div>
