@@ -17,8 +17,23 @@ const ListItem = ({ result }) => {
             onClick={() => {
               fetch("/api/post/delete", {
                 method: "DELETE",
-                body: JSON.stringify({ _id: object._id }),
-              }).then(() => {});
+                body: object._id,
+              })
+                .then((result) => {
+                  if (result.status == 200) {
+                    return result.json();
+                  } else {
+                    //서버가 에러 코드 전송 시 실행할 코드
+                  }
+                })
+                .then((result) => {
+                  //성공 시 실행할 코드
+                  console.log(result);
+                })
+                .catch((error) => {
+                  //인터넷 문제 등으로 실패 시 실행할 코드
+                  console.log(error);
+                });
             }}
           >
             🗑️
