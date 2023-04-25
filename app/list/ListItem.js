@@ -14,10 +14,9 @@ const ListItem = ({ result }) => {
             📝
           </Link>
           <span
-            onClick={() => {
-              fetch("/api/post/delete", {
+            onClick={(e) => {
+              fetch("/api/post/delete/" + object._id, {
                 method: "DELETE",
-                body: object._id,
               })
                 .then((result) => {
                   if (result.status == 200) {
@@ -28,7 +27,10 @@ const ListItem = ({ result }) => {
                 })
                 .then((result) => {
                   //성공 시 실행할 코드
-                  console.log(result);
+                  e.target.parentElement.style.opacity = 0;
+                  setTimeout(() => {
+                    e.target.parentElement.style.display = "none";
+                  }, 1000);
                 })
                 .catch((error) => {
                   //인터넷 문제 등으로 실패 시 실행할 코드
