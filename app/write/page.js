@@ -1,7 +1,5 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { signIn } from "next-auth/react";
-import LoginBtn from "../LoginBtn";
 
 export default async function Write() {
   let session = await getServerSession(authOptions);

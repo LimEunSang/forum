@@ -18,9 +18,9 @@ export default async function handler(request, response) {
     const db = client.db("forum");
 
     // 이메일 중복 체크
-    let result = await db.collection("post").find().toArray();
-    result.map((post) => {
-      if (post.email == request.body.email) {
+    let result = await db.collection("user_cred").find().toArray();
+    result.map((user) => {
+      if (user.email == request.body.email) {
         return response.status(500).json("이미 존재하는 이메일입니다");
       }
     });
