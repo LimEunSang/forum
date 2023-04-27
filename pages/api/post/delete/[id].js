@@ -1,28 +1,31 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]";
 
 export default async function handler(request, response) {
   if (request.method == "DELETE") {
     try {
-      // console.log(request.query);
-      // { id: '6447c00ed033d5cf98f6b71d' }
-
+      let session = await getServerSession(request, response, authOptions);
       const client = await connectDB;
       const db = client.db("forum");
-      let result = await db
+      let findedPost = await db
         .collection("post")
-        .deleteOne({ _id: new ObjectId(request.query.id) });
+        .findOne({ _id: new ObjectId(request.query.id) });
 
-      // console.log(result);
-      // { acknowledged: true, deletedCount: 1 }
+      if (session && session.user.email == findedPost.author) {
+        let result = await db
+          .collection("post")
+          .deleteOne({ _id: new ObjectId(request.query.id) });
 
-      if (result.deletedCount == 1) {
         return response.status(200).json(result);
       } else {
-        return response.status(500).json(result);
+        return response
+          .status(500)
+          .json({ error: "작성자만 게시물을 삭제할 수 있습니다!" });
       }
     } catch (error) {
-      return response.status(500).json(error);
+      return response.status(500).json({ error: "DB 연결에 실패하였습니다!" });
     }
   }
 }

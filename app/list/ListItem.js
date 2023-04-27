@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-const ListItem = ({ result, session }) => {
+const ListItem = ({ result }) => {
   return (
     <div>
       {result.map((object, key) => (
@@ -13,38 +13,35 @@ const ListItem = ({ result, session }) => {
           <Link prefetch={false} href={"/edit/" + object._id}>
             📝
           </Link>
-          {session && session.user.email == object.author ? (
-            <span
-              onClick={(e) => {
-                fetch("/api/post/delete/" + object._id, {
-                  method: "DELETE",
+          <span
+            onClick={(e) => {
+              fetch("/api/post/delete/" + object._id, {
+                method: "DELETE",
+              })
+                .then((result) => {
+                  if (result.status == 200) {
+                    return result.json();
+                  } else {
+                    return result.json().then((error) => {
+                      throw new Error(error.error);
+                    });
+                  }
                 })
-                  .then((result) => {
-                    if (result.status == 200) {
-                      return result.json();
-                    } else {
-                      //서버가 에러 코드 전송 시 실행할 코드
-                    }
-                  })
-                  .then((result) => {
-                    //성공 시 실행할 코드
-                    e.target.parentElement.style.opacity = 0;
-                    setTimeout(() => {
-                      e.target.parentElement.style.display = "none";
-                    }, 1000);
-                  })
-                  .catch((error) => {
-                    //인터넷 문제 등으로 실패 시 실행할 코드
-                    console.log(error);
-                  });
-              }}
-            >
-              🗑️
-            </span>
-          ) : (
-            <></>
-          )}
-
+                .then((result) => {
+                  // 성공 시 실행할 코드
+                  e.target.parentElement.style.opacity = 0;
+                  setTimeout(() => {
+                    e.target.parentElement.style.display = "none";
+                  }, 1000);
+                })
+                .catch((error) => {
+                  // 실패 시 실행할 코드
+                  alert(error.message);
+                });
+            }}
+          >
+            🗑️
+          </span>
           <p>1월 1일</p>
         </div>
       ))}

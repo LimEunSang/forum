@@ -7,6 +7,7 @@ const Detail = async (props) => {
   let result = await db.collection("post").findOne({
     _id: new ObjectId(props.params.id),
   });
+  // console.log(result.author);
 
   return (
     <>
