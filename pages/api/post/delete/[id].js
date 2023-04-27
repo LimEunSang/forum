@@ -7,13 +7,18 @@ export default async function handler(request, response) {
   if (request.method == "DELETE") {
     try {
       let session = await getServerSession(request, response, authOptions);
+
       const client = await connectDB;
       const db = client.db("forum");
       let findedPost = await db
         .collection("post")
         .findOne({ _id: new ObjectId(request.query.id) });
 
-      if (session && session.user.email == findedPost.author) {
+      if (
+        session &&
+        (session.user.email == findedPost.author ||
+          session.user.role == "admin")
+      ) {
         let result = await db
           .collection("post")
           .deleteOne({ _id: new ObjectId(request.query.id) });

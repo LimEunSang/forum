@@ -18,16 +18,16 @@ const ListItem = ({ result }) => {
               fetch("/api/post/delete/" + object._id, {
                 method: "DELETE",
               })
-                .then((result) => {
-                  if (result.status == 200) {
-                    return result.json();
+                .then((response) => {
+                  if (response.status == 200) {
+                    return response.json();
                   } else {
-                    return result.json().then((error) => {
+                    return response.json().then((error) => {
                       throw new Error(error.error);
                     });
                   }
                 })
-                .then((result) => {
+                .then((data) => {
                   // 성공 시 실행할 코드
                   e.target.parentElement.style.opacity = 0;
                   setTimeout(() => {
