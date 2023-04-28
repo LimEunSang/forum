@@ -1,10 +1,7 @@
 import { connectDB } from "@/util/database";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]";
 import { ObjectId } from "mongodb";
 
 export default async function handler(request, response) {
-  let session = await getServerSession(request, response, authOptions);
   if (request.method == "GET") {
     try {
       const client = await connectDB;

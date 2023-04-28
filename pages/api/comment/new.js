@@ -28,7 +28,7 @@ export default async function handler(request, response) {
       let result = await db.collection("comment").insertOne(data);
       return response.status(200).json(result);
     } catch (error) {
-      return response.status(500).json(error);
+      return response.status(500).json({ error: "DB 연결 실패" });
     }
   }
 }
