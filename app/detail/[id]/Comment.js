@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Comment() {
+export default function Comment({ parent }) {
   let [comment, setComment] = useState("");
+
+  // useEffect(() => {
+  //   fetch();
+  // }, []);
+
   return (
     <div>
       <div>댓글목록보여줄부분</div>
@@ -14,7 +19,10 @@ export default function Comment() {
       />
       <button
         onClick={() => {
-          fetch("/URL", { method: "POST", body: comment });
+          fetch("/api/comment/new", {
+            method: "POST",
+            body: JSON.stringify({ comment: comment, parent: parent }),
+          });
         }}
       >
         댓글전송
