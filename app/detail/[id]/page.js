@@ -1,5 +1,6 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
+import Comment from "./Comment";
 
 const Detail = async (props) => {
   const client = await connectDB;
@@ -13,6 +14,7 @@ const Detail = async (props) => {
       <h4>상세페이지</h4>
       <h4>{result.title}</h4>
       <p>{result.content}</p>
+      <Comment />
     </>
   );
 };
