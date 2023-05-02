@@ -2,6 +2,7 @@ import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import Comment from "./Comment";
 import Heart from "./Heart";
+import { notFound } from "next/navigation";
 
 const Detail = async (props) => {
   const client = await connectDB;
@@ -9,6 +10,8 @@ const Detail = async (props) => {
   let result = await db.collection("post").findOne({
     _id: new ObjectId(props.params.id),
   });
+
+  if (result === null) return notFound();
 
   return (
     <>
