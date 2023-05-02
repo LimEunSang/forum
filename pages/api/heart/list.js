@@ -7,6 +7,10 @@ export default async function handler(request, response) {
   let session = await getServerSession(request, response, authOptions);
   if (request.method == "GET") {
     try {
+      if (!session) {
+        return response.status(200).json(null);
+      }
+
       const client = await connectDB;
       const db = client.db("forum");
       let result = await db.collection("heart").findOne({
@@ -15,7 +19,7 @@ export default async function handler(request, response) {
       });
       return response.status(200).json(result);
     } catch (error) {
-      return response.status(500).json(error);
+      return response.status(500).json({ error: "DB 연결 실패" });
     }
   }
 }

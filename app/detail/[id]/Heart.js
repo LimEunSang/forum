@@ -8,7 +8,15 @@ export default function Heart({ parent }) {
 
   const getData = () => {
     fetch(`/api/heart/list?parent=${parent}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status == 200) {
+          return response.json();
+        } else {
+          return response.json().then((error) => {
+            throw new Error(error.error);
+          });
+        }
+      })
       .then((data) => {
         if (data) setIsHeart(true);
         setLoading(false);
@@ -30,11 +38,17 @@ export default function Heart({ parent }) {
           onClick={() => {
             fetch("/api/heart/delete", { method: "DELETE", body: parent })
               .then((response) => {
-                return response.json();
+                if (response.status == 200) {
+                  setIsHeart(!isHeart);
+                  return response.json();
+                } else {
+                  return response.json().then((error) => {
+                    throw new Error(error.error);
+                  });
+                }
               })
               .then((data) => {
                 // console.log(data);
-                setIsHeart(!isHeart);
               })
               .catch((error) => {
                 alert(error.message);
@@ -49,11 +63,17 @@ export default function Heart({ parent }) {
           onClick={() => {
             fetch("/api/heart/new", { method: "POST", body: parent })
               .then((response) => {
-                return response.json();
+                if (response.status == 200) {
+                  setIsHeart(!isHeart);
+                  return response.json();
+                } else {
+                  return response.json().then((error) => {
+                    throw new Error(error.error);
+                  });
+                }
               })
               .then((data) => {
                 // console.log(data);
-                setIsHeart(!isHeart);
               })
               .catch((error) => {
                 alert(error.message);

@@ -87,10 +87,10 @@ export const authOptions = {
       session.user = token.user; // 토큰에 있는 모든 정보를 유저에게 전송
 
       // 소셜로그인 session에 id 정보 추가
-      session.user.id = token.sub;
+      if (!session.user.id) session.user.id = token.sub;
 
       // 소셜로그인 session에 role 정보 추가
-      assignRole(session.user);
+      if (!session.user.role) assignRole(session.user);
 
       return session;
     },
