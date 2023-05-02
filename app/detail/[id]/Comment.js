@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 export default function Comment({ parent }) {
   let [comment, setComment] = useState("");
   let [data, setData] = useState([]);
+  let [loading, setLoading] = useState(true);
 
   const getData = () => {
     fetch(`/api/comment/list?parent=${parent}`)
       .then((response) => response.json())
       .then((data) => {
         setData(data);
+        setLoading(false);
       })
       .catch((error) => {});
   };
@@ -23,9 +25,14 @@ export default function Comment({ parent }) {
     <div>
       <hr />
       <div>댓글목록보여줄부분</div>
-      {data.length > 0
-        ? data.map((item, key) => <p key={key}>{item.comment}</p>)
-        : "댓글 없음 / 로딩 중.."}
+      {!loading
+        ? data.map((item, key) => (
+            <div key={key}>
+              <p style={{ marginBottom: "0px" }}>[{item.author}]</p>
+              <p style={{ marginTop: "0px" }}>{item.comment}</p>
+            </div>
+          ))
+        : "loading.."}
       <input
         id="commentInput"
         onChange={(e) => {

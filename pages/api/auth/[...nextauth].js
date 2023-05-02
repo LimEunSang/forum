@@ -4,13 +4,15 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import { assignRole } from "./signup";
 
 export const authOptions = {
   providers: [
     GithubProvider({
-      clientId: "0421b75068333d8c946e",
-      clientSecret: process.env.GITHUBPROVIDER_SECRET,
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
     }),
+
     CredentialsProvider({
       // 1. 로그인 페이지 폼 자동 생성해주는 코드
       name: "credentials",
@@ -60,16 +62,36 @@ export const authOptions = {
     jwt: async ({ token, user }) => {
       if (user) {
         token.user = {};
+        token.user.id = user._id; // (소셜로그인 시 없는 값)
         token.user.name = user.name;
         token.user.email = user.email;
-        token.user.role = user.role;
+        token.user.role = user.role; // (소셜로그인 시 없는 값)
+        // cf. 소셜로그인 시 없는 값은 추가되지 않음
       }
+
       return token;
     },
     // 5. 유저 세션이 조회될 때마다 실행되는 코드
     session: async ({ session, token }) => {
+      // cf. 소셜로그인 시 console.log(token):
+      // name: 'LimEunSang',
+      // email: 'dmstkd2905@naver.com',
+      // picture: 'https://avatars.githubusercontent.com/u/86942472?v=4',
+      // sub: '644bd50f7c1c9593aaf25dca',
+      // user: { name: 'LimEunSang', email: 'dmstkd2905@naver.com' },
+      // iat: 1682993739,
+      // exp: 1685585739,
+      // jti: '0c477516-2be2-4d28-83e7-547ccb1bad68'
+
       // 컴포넌트 안에서 보여줄 유저 정보
       session.user = token.user; // 토큰에 있는 모든 정보를 유저에게 전송
+
+      // 소셜로그인 session에 id 정보 추가
+      session.user.id = token.sub;
+
+      // 소셜로그인 session에 role 정보 추가
+      assignRole(session.user);
+
       return session;
     },
   },
