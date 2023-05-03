@@ -1,12 +1,18 @@
-### 강의 실습 코드
+## 프로젝트 소개
 
-https://codingapple.com/course/next-js/
+이 프로젝트는 Next.js 버전 13으로 게시판을 만드는 강의 실습 코드입니다. 강의 내용 외에 몇 가지 기능을 추가로 구현하였습니다.
 
-**강의 정리**
+This project is the lecture lab code for creating a bulletin board with Next.js version 13. We've implemented a few additional features beyond the lecture content.
 
-https://resilient-aura-65d.notion.site/Part-2-f6ad30f4c9624d86a8a61fb8bf62d801
+## 강의 정보
 
-**추가한 기능**
+- https://codingapple.com/course/next-js/
+
+## 강의 정리
+
+- https://resilient-aura-65d.notion.site/Part-2-f6ad30f4c9624d86a8a61fb8bf62d801
+
+## 추가한 기능
 
 - API 통신 시 status code에 따른 예외 처리
 - *회원기능 만들기 : 아이디/비번 + JWT 사용하기* ➝ 오늘의 응용사항
