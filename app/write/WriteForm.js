@@ -39,6 +39,7 @@ export default function WriteForm() {
           }}
         />
         <img src={src} />
+        <input style={{ display: "none" }} name="src" value={src} />
         <button type="submit">버튼</button>
       </form>
     </div>
