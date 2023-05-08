@@ -17,7 +17,7 @@ export default async function Edit(props) {
         <input
           style={{ display: "none" }}
           name="_id"
-          defaultValue={result._id.toString()}
+          value={result._id.toString()}
         />
         <button type="submit">버튼</button>
       </form>
