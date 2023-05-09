@@ -29,7 +29,7 @@ This project is the lecture lab code for creating a bulletin board with Next.js 
     - '좋아요'를 등록하지 않은 유저에게는 '속이 빈 하트' 출력
     - '속이 빈 하트' 클릭 시 '좋아요' 등록
     - '좋아요'를 등록한 유저에게는 '속이 찬 하트' 출력
-- vercel 배포: forum-es.vercel.app
+- vercel 배포: https://forum-es.vercel.app
 - *이미지 업로드 기능 2*
   - 글 발행 시 form 태그 ➝ ajax 요청으로 폼 전송
   - 이미지 선택과 동시에 업로드 → 글 발행 누르면 이미지 업로드
