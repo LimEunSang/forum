@@ -78,10 +78,10 @@ export default function WriteForm() {
         accept="image/*"
         onChange={(e) => {
           setFile(e.target.files[0]);
-          setSrc(URL.createObjectURL(e.target.files[0]));
+          if (e.target.files[0]) setSrc(URL.createObjectURL(e.target.files[0]));
         }}
       />
-      <img src={src} />
+      {file && <img src={src} />}
       <button onClick={handleSubmit}>작성</button>
     </div>
   );
