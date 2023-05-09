@@ -53,7 +53,9 @@ export default function WriteForm() {
 
   // setImgURL()가 정상적으로 완료된 이후에 assignPost() 실행
   useEffect(() => {
-    assignPost();
+    if (imgURL) {
+      assignPost();
+    }
   }, [imgURL]);
 
   return (
