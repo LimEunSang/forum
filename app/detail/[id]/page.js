@@ -18,6 +18,8 @@ const Detail = async (props) => {
       <h4>상세페이지</h4>
       <h4>{result.title}</h4>
       <p>{result.content}</p>
+      <img src={result.imgURL} />
+      <br />
       <Heart parent={result._id.toString()} />
       <Comment parent={result._id.toString()} />
     </>

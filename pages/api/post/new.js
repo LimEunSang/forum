@@ -16,14 +16,11 @@ export default async function handler(request, response) {
     }
 
     try {
-      console.log(request.body);
+      const client = await connectDB;
+      const db = client.db("forum");
+      let result = await db.collection("post").insertOne(request.body);
 
-      // const client = await connectDB;
-      // const db = client.db("forum");
-      // let result = await db.collection("post").insertOne(request.body);
-
-      // return response.redirect(302, "/list");
-      return response.status(200).json();
+      return response.status(200).json(result);
     } catch (error) {
       return response.status(500).json(error);
     }
