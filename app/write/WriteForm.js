@@ -8,6 +8,7 @@ export default function WriteForm() {
   const [src, setSrc] = useState(""); // 미리보기 source
   const [imgURL, setImgURL] = useState(""); // img 저장 서버 경로
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const assignPost = () => {
     fetch("/api/post/new", {
@@ -25,6 +26,8 @@ export default function WriteForm() {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
+
     // 파일 업로드
     if (file) {
       let filename = encodeURIComponent(file.name);
@@ -49,6 +52,8 @@ export default function WriteForm() {
     }
 
     if (!file) assignPost();
+
+    setLoading(false);
   };
 
   // setImgURL()가 정상적으로 완료된 이후에 assignPost() 실행
@@ -84,7 +89,12 @@ export default function WriteForm() {
         }}
       />
       {file && <img src={src} />}
-      <button onClick={handleSubmit}>작성</button>
+      <button
+        onClick={handleSubmit}
+        style={{ cursor: loading ? "wait" : "default" }}
+      >
+        작성
+      </button>
     </div>
   );
 }
