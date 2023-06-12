@@ -57,3 +57,11 @@ a {
   opacity: 1; /* 투명도 */
   transition: all 1s; /* 1초에 걸처 CSS 변경 실행 */
 }
+
+.dark-mode .navbar {
+  background-color: #222;
+}
+
+.dark-mode .navbar .a {
+  color: white;
+}
