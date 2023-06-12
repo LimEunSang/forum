@@ -19,9 +19,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body
-        className={mode && mode.value == "dark" ? "dark-mode" : "light-mode"}
-      >
+      <body className={mode && mode.value == "dark" ? "dark-mode" : ""}>
         <div className="navbar">
           <Link href="/" className="logo">
             Appleforum
@@ -39,7 +37,7 @@ export default async function RootLayout({ children }) {
               <LoginBtn />
             </>
           )}
-          <DarkMode />
+          <DarkMode mode={mode.value} />
         </div>
         {children}
       </body>
