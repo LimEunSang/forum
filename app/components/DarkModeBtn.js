@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function DarkMode({ mode }) {
+export default function DarkModeBtn({ mode }) {
   let router = useRouter();
 
   const modeBtnHandler = () => {
@@ -18,5 +18,9 @@ export default function DarkMode({ mode }) {
     }
   }, []);
 
-  return <span onClick={modeBtnHandler}>{mode === "dark" ? "🌙" : "☀️"}</span>;
+  return (
+    <span className="DarkModeBtn" onClick={modeBtnHandler}>
+      {mode === "dark" ? "🌙" : "☀️"}
+    </span>
+  );
 }

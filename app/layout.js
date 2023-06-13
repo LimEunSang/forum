@@ -3,9 +3,9 @@ import Link from "next/link";
 import LoginBtn from "./components/LoginBtn";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import LogoutBtn from "./components/LogoutBtn";
-import DarkMode from "./components/DarkMode";
+import DarkModeBtn from "./components/DarkModeBtn";
 import { cookies } from "next/headers";
+import UserBtn from "./components/UserBtn";
 
 export const metadata = {
   title: "Create Next App",
@@ -21,26 +21,36 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={mode && mode.value == "dark" ? "dark-mode" : ""}>
-        <div className="navbar">
-          <Link href="/" className="logo">
-            Appleforum
-          </Link>
-          <Link href="/list">List</Link>
-          <Link href="/write">Write</Link>
-          {session ? (
-            <>
-              {session.user.name}
-              <LogoutBtn />
-            </>
-          ) : (
-            <>
-              <Link href="/register">Register</Link>
-              <LoginBtn />
-            </>
-          )}
-          <DarkMode mode={mode.value} />
+        <div className="layout">
+          <div className="container">
+            <div className="header">
+              <div className="logoBox">
+                <Link className="logo" href="/">
+                  Appleforum
+                </Link>
+              </div>
+              <div className="mainMenu">
+                <DarkModeBtn mode={mode.value} />
+                {session ? (
+                  <>
+                    <Link className="btn" href="/write">
+                      새 글 작성
+                    </Link>
+                    <UserBtn userName={session.user.name} />
+                  </>
+                ) : (
+                  <>
+                    <Link className="btn" href="/register">
+                      회원가입
+                    </Link>
+                    <LoginBtn />
+                  </>
+                )}
+              </div>
+            </div>
+            {children}
+          </div>
         </div>
-        {children}
       </body>
     </html>
   );
