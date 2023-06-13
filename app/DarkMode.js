@@ -18,21 +18,5 @@ export default function DarkMode({ mode }) {
     }
   }, []);
 
-  return mode === "dark" ? (
-    <span
-      onClick={() => {
-        modeBtnHandler();
-      }}
-    >
-      🌙
-    </span>
-  ) : (
-    <span
-      onClick={() => {
-        modeBtnHandler();
-      }}
-    >
-      ☀️
-    </span>
-  );
+  return <span onClick={modeBtnHandler}>{mode === "dark" ? "🌙" : "☀️"}</span>;
 }

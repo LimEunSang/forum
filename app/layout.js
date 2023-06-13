@@ -16,6 +16,7 @@ export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions);
 
   let mode = cookies().get("mode");
+  if (!mode) mode = {}; // 쿠키가 존재하지 않으면 DarkMode component에서 mode.value가 정의되지 않아 발생하는 오류 방지
 
   return (
     <html lang="en">
