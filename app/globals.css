@@ -164,10 +164,6 @@ a {
   color: white;
 }
 
-.user .arrow {
-  color: gray;
-}
-
-.user:hover .arrow {
+.dark-mode .user:hover .arrow {
   color: white;
 }
