@@ -34,3 +34,6 @@ This project is the lecture lab code for creating a bulletin board with Next.js 
   - 글 발행 시 form 태그 ➝ ajax 요청으로 폼 전송
   - 이미지 선택과 동시에 업로드 → 글 발행 누르면 이미지 업로드
   - detail 페이지에서 이미지 렌더링
+- *Dark Mode 기능 2* ➝ 오늘의 응용사항
+  - mode에 따라 렌더링 하는 버튼 및 기능 구분
+  - cookie 정보를 불러오는 코드 중복 간소화
