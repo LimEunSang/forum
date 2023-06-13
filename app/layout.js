@@ -1,10 +1,10 @@
-import Link from "next/link";
-import LoginBtn from "./LoginBtn";
 import "./globals.css";
+import Link from "next/link";
+import LoginBtn from "./components/LoginBtn";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import LogoutBtn from "./LogoutBtn";
-import DarkMode from "./DarkMode";
+import LogoutBtn from "./components/LogoutBtn";
+import DarkMode from "./components/DarkMode";
 import { cookies } from "next/headers";
 
 export const metadata = {
