@@ -7,7 +7,7 @@ export default function UserBtn({ userName }) {
   const [activate, setActivate] = useState(false);
 
   return (
-    <div className="userBtn">
+    <span className="userBtn">
       <span
         className="user"
         onClick={() => {
@@ -18,6 +18,6 @@ export default function UserBtn({ userName }) {
         <span className="arrow">▼</span>
       </span>
       <div className="userMenu">{activate && <LogoutBtn />}</div>
-    </div>
+    </span>
   );
 }

@@ -59,6 +59,20 @@ body {
 .DarkModeBtn {
   padding: 10px;
   cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.5s;
+}
+
+.DarkModeBtn:hover {
+  transform: translateY(-5px);
+}
+
+.writeBtn {
+  transition: all 0.5s;
+}
+
+.writeBtn:hover {
+  transform: translateY(-5px);
 }
 
 .userBtn {
@@ -92,6 +106,11 @@ body {
   display: block;
   padding: 10px;
   cursor: pointer;
+  border-radius: 8px;
+}
+
+.userMenuItem:hover {
+  background-color: rgba(128, 128, 128, 0.1);
 }
 
 /* list */
@@ -166,4 +185,8 @@ a {
 
 .dark-mode .user:hover .arrow {
   color: white;
+}
+
+.dark-mode .userMenuItem:hover {
+  background-color: rgb(255, 255, 255, 0.1);
 }
