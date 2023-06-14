@@ -1,9 +1,14 @@
 import { connectDB } from "@/util/database";
-import ListItem from "./components/ListItem";
+import PostList from "./components/PostList";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
+  let session = await getServerSession(authOptions);
+  if (!session) session = { user: { name: "", email: "", id: "", role: "" } };
+
   const client = await connectDB;
   const db = client.db("forum");
   let result = await db.collection("post").find().toArray();
@@ -17,9 +22,6 @@ export default async function Home() {
     return object;
   });
 
-  return (
-    <div className="list-bg">
-      <ListItem result={result} />
-    </div>
-  );
+  // return <div>gkdl</div>;
+  return <PostList result={result} user={session.user} />;
 }

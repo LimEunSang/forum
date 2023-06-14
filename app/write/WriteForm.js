@@ -20,7 +20,7 @@ export default function WriteForm() {
       }),
     })
       .then((response) => {
-        if (response.status == 200) window.location.replace("/list");
+        if (response.status == 200) window.location.replace("/");
       })
       .catch((error) => alert(error));
   };

@@ -8,7 +8,10 @@ export default async function handler(request, response) {
     request.body = JSON.parse(request.body);
 
     if (session) {
-      request.body.author = session.user.email; // request.body에 { author: email } 항목 추가
+      request.body.author = {
+        email: session.user.email,
+        name: session.user.name,
+      }; // request.body에 { author: {email: email, user: user} 항목 추가
     }
 
     if (request.body.title == "" || request.body.content == "") {
