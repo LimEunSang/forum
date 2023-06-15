@@ -16,11 +16,10 @@ export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions);
 
   let mode = cookies().get("mode");
-  if (!mode) mode = {}; // 쿠키가 존재하지 않으면 DarkMode component에서 mode.value가 정의되지 않아 발생하는 오류 방지
 
   return (
     <html lang="en">
-      <body className={mode && mode.value == "dark" ? "dark-mode" : ""}>
+      <body className={mode && mode.value == "dark" ? "darkMode" : ""}>
         <div className="layout">
           <div className="container">
             <div className="header">
@@ -30,7 +29,7 @@ export default async function RootLayout({ children }) {
                 </Link>
               </div>
               <div className="mainMenu">
-                <DarkModeBtn mode={mode.value} />
+                <DarkModeBtn mode={mode && mode.value} />
                 {session ? (
                   <>
                     <Link className="btn writeBtn" href="/write">

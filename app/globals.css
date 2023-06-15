@@ -8,12 +8,23 @@ body {
   padding: 0;
 }
 
+.darkMode {
+  background-color: black;
+  color: white;
+}
+
 .btn {
   font-size: 14px;
   border: 1px solid black;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.darkMode .btn {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
 }
 
 .iconBtn {
@@ -51,6 +62,11 @@ body {
 
 .logo {
   font-weight: bold;
+}
+
+.darkMode .logo {
+  background-color: black;
+  color: white;
 }
 
 .mainMenu {
@@ -94,6 +110,10 @@ body {
   color: black;
 }
 
+.darkMode .user:hover .arrow {
+  color: white;
+}
+
 .userMenu {
   position: absolute;
   top: calc(100% + 10px);
@@ -113,6 +133,10 @@ body {
 
 .userMenuItem:hover {
   background-color: rgba(128, 128, 128, 0.1);
+}
+
+.darkMode .userMenuItem:hover {
+  background-color: rgb(255, 255, 255, 0.1);
 }
 
 /* post */
@@ -136,7 +160,11 @@ body {
   margin-bottom: 20px;
   box-shadow: 2px 2px 8px gray;
   opacity: 1;
-  transition: all 1s, transform 0.5s;
+  transition: opacity 1s, display 1s, transform 0.5s;
+}
+
+.darkMode .postItem {
+  background-color: #202020;
 }
 
 .postItem:hover {
@@ -163,6 +191,10 @@ body {
   font-weight: 800;
   margin: 0;
   padding: 0px 12px;
+}
+
+.darkMode .postItem .contentBox h4 {
+  color: white;
 }
 
 .postItem .infoBox {
@@ -207,38 +239,4 @@ button {
 a {
   text-decoration: none;
   color: black;
-}
-
-/* ---dark-mode--- */
-
-.dark-mode {
-  background-color: black;
-  color: white;
-}
-
-.dark-mode .btn {
-  background-color: black;
-  color: white;
-  border: 1px solid white;
-}
-
-/* header */
-
-.dark-mode .logo {
-  background-color: black;
-  color: white;
-}
-
-.dark-mode .user:hover .arrow {
-  color: white;
-}
-
-.dark-mode .userMenuItem:hover {
-  background-color: rgb(255, 255, 255, 0.1);
-}
-
-/* post */
-
-.dark-mode .postItem .contentBox h4 {
-  color: white;
 }
