@@ -16,6 +16,10 @@ body {
   cursor: pointer;
 }
 
+.iconBtn {
+  cursor: pointer;
+}
+
 /* layout */
 
 .layout {
@@ -55,14 +59,13 @@ body {
   align-items: center;
 }
 
-.DarkModeBtn {
+.darkModeBtn {
   padding: 10px;
-  cursor: pointer;
   margin-right: 10px;
   transition: transform 0.5s;
 }
 
-.DarkModeBtn:hover {
+.darkModeBtn:hover {
   transform: translateY(-5px);
 }
 

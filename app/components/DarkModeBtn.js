@@ -19,7 +19,7 @@ export default function DarkModeBtn({ mode }) {
   }, []);
 
   return (
-    <span className="DarkModeBtn" onClick={modeBtnHandler}>
+    <span className="iconBtn darkModeBtn" onClick={modeBtnHandler}>
       {mode === "dark" ? "🌙" : "☀️"}
     </span>
   );

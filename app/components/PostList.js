@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { timeForToday } from "../utils/timeForToday";
 
 const PostList = ({ result, user }) => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const PostList = ({ result, user }) => {
             <div className="textBox">
               <span>{object.author.name}</span>
               <span>•</span>
-              <span>1월 1일</span>
+              <span>{timeForToday(object.creationDate)}</span>
             </div>
             {(user.role == "admin" || user.email == object.author.email) && (
               <div className="iconBtnBox">
@@ -33,6 +34,7 @@ const PostList = ({ result, user }) => {
                   📝
                 </Link>
                 <span
+                  className="iconBtn"
                   onClick={(e) => {
                     fetch("/api/post/delete/" + object._id, {
                       method: "DELETE",

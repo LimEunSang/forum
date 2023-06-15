@@ -22,6 +22,5 @@ export default async function Home() {
     return object;
   });
 
-  // return <div>gkdl</div>;
   return <PostList result={result} user={session.user} />;
 }
