@@ -8,8 +8,12 @@ body {
   padding: 0;
 }
 
+body {
+  background-color: #f9f9f9;
+}
+
 .darkMode {
-  background-color: black;
+  background-color: #141414;
   color: white;
 }
 
@@ -19,12 +23,22 @@ body {
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.5s;
 }
 
 .darkMode .btn {
-  background-color: black;
   color: white;
   border: 1px solid white;
+}
+
+.btn:hover {
+  color: white;
+  background-color: black;
+}
+
+.darkMode .btn:hover {
+  color: black;
+  background-color: white;
 }
 
 .iconBtn {
@@ -76,21 +90,18 @@ body {
 }
 
 .darkModeBtn {
-  padding: 10px;
+  padding: 7px;
+  border-radius: 5px;
   margin-right: 10px;
   transition: transform 0.5s;
 }
 
 .darkModeBtn:hover {
-  transform: translateY(-5px);
+  background-color: #e0e0e0;
 }
 
-.writeBtn {
-  transition: transform 0.5s;
-}
-
-.writeBtn:hover {
-  transform: translateY(-5px);
+.darkMode .darkModeBtn:hover {
+  background-color: #2a2a2a;
 }
 
 .userBtn {
@@ -155,20 +166,27 @@ body {
   justify-content: space-between;
   width: calc(25% - 20px);
   aspect-ratio: 5 / 4;
+  background-color: white;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
-  box-shadow: 2px 2px 8px gray;
   opacity: 1;
-  transition: opacity 1s, display 1s, transform 0.5s;
+  transition: opacity 1s, display 1s, transform 0.5s, box-shadow 0.5s;
 }
 
 .darkMode .postItem {
   background-color: #202020;
+  box-shadow: 0px 4px 16px 0px rgba(255, 255, 255, 0.1);
 }
 
 .postItem:hover {
   transform: translateY(-6px);
+  box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.04);
+}
+
+.darkMode .postItem:hover {
+  box-shadow: 5px 5px 10px rgb(255, 255, 255, 0.1);
 }
 
 .postItem .contentBox {
