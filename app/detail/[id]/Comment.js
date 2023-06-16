@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Loading from "@/app/components/Loading";
 
 export default function Comment({ parent }) {
   let [comment, setComment] = useState("");
@@ -57,14 +58,16 @@ export default function Comment({ parent }) {
           댓글 작성
         </button>
       </div>
-      {!loading
-        ? data.map((item, key) => (
-            <div className="commentItem" key={key}>
-              <p className="author">{item.author}</p>
-              <p className="content">{item.comment}</p>
-            </div>
-          ))
-        : "loading.."}
+      {!loading ? (
+        data.map((item, key) => (
+          <div className="commentItem" key={key}>
+            <p className="author">{item.author}</p>
+            <p className="content">{item.comment}</p>
+          </div>
+        ))
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

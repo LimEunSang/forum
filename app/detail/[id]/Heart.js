@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Loading from "@/app/components/Loading";
 
 export default function Heart({ parent }) {
   const [loading, setLoading] = useState(true);
@@ -53,7 +54,7 @@ export default function Heart({ parent }) {
   return (
     <div className="heartWrapper">
       <div className={scrollY > 210 ? "fixed heart" : "heart"}>
-        {loading && <p>loading..</p>}
+        {loading && <Loading />}
         {!loading && isHeart && (
           <button
             className="heartBtn"
