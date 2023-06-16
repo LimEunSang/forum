@@ -14,15 +14,18 @@ const Detail = async (props) => {
   if (result === null) return notFound();
 
   return (
-    <>
-      <h4>상세페이지</h4>
-      <h4>{result.title}</h4>
+    <div className="detail">
+      <h1>{result.title}</h1>
+      {result.imgURL && (
+        <div className="imgBox">
+          <img src={result.imgURL} alt="img" />
+        </div>
+      )}
       <p>{result.content}</p>
-      <img src={result.imgURL} />
-      <br />
-      <Heart parent={result._id.toString()} />
+      <hr />
       <Comment parent={result._id.toString()} />
-    </>
+      <Heart parent={result._id.toString()} />
+    </div>
   );
 };
 

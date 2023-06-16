@@ -22,47 +22,49 @@ export default function Comment({ parent }) {
   }, []);
 
   return (
-    <div>
-      <hr />
-      <div>댓글목록보여줄부분</div>
-      {!loading
-        ? data.map((item, key) => (
-            <div key={key}>
-              <p style={{ marginBottom: "0px" }}>[{item.author}]</p>
-              <p style={{ marginTop: "0px" }}>{item.comment}</p>
-            </div>
-          ))
-        : "loading.."}
-      <input
+    <div className="comment">
+      <textarea
         id="commentInput"
+        placeholder="댓글을 작성하세요"
         onChange={(e) => {
           setComment(e.target.value);
         }}
       />
-      <button
-        onClick={() => {
-          fetch("/api/comment/new", {
-            method: "POST",
-            body: JSON.stringify({ comment: comment, parent: parent }),
-          })
-            .then((response) => {
-              if (response.status == 200) {
-                getData();
-                document.getElementById("commentInput").value = "";
-                setComment("");
-              } else {
-                return response.json().then((error) => {
-                  throw new Error(error.error);
-                });
-              }
+      <div className="commentBtnBox">
+        <button
+          className="btn commentBtn"
+          onClick={() => {
+            fetch("/api/comment/new", {
+              method: "POST",
+              body: JSON.stringify({ comment: comment, parent: parent }),
             })
-            .catch((error) => {
-              alert(error.message);
-            });
-        }}
-      >
-        댓글전송
-      </button>
+              .then((response) => {
+                if (response.status == 200) {
+                  getData();
+                  document.getElementById("commentInput").value = "";
+                  setComment("");
+                } else {
+                  return response.json().then((error) => {
+                    throw new Error(error.error);
+                  });
+                }
+              })
+              .catch((error) => {
+                alert(error.message);
+              });
+          }}
+        >
+          댓글 작성
+        </button>
+      </div>
+      {!loading
+        ? data.map((item, key) => (
+            <div className="commentItem" key={key}>
+              <p className="author">{item.author}</p>
+              <p className="content">{item.comment}</p>
+            </div>
+          ))
+        : "loading.."}
     </div>
   );
 }

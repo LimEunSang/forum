@@ -17,6 +17,31 @@ body {
   color: white;
 }
 
+button {
+  background-color: transparent;
+}
+
+input {
+  padding: 10px;
+}
+
+hr {
+  margin: 20px 0 10px;
+}
+
+.darkMode hr {
+  background: gray;
+  height: 1px;
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* component */
+
 .btn {
   font-size: 14px;
   border: 1px solid black;
@@ -58,16 +83,21 @@ body {
 .container {
   width: 100%;
   max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* header */
 
 .header {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 0px;
+  /* padding: 30px 0px; */
+  padding: 100px 0px;
 }
 
 .header a {
@@ -234,27 +264,101 @@ body {
   flex-direction: row;
 }
 
+/* detail */
+
+.detail {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.detail h1 {
+  margin: 20px 0px;
+}
+
+.detail .imgBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 0px;
+}
+
+.detail img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.detail p {
+  margin: 40px 0px, 20px; /* 위, 양 옆, 아래*/
+  font-size: 18px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.comment #commentInput {
+  width: 100%;
+  height: 14vh;
+  font-size: 18px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  padding: 16px;
+}
+
+.darkMode .comment #commentInput {
+  background-color: #202020;
+  color: white;
+}
+
+.comment .commentBtnBox {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.comment .commentBtn {
+  margin-top: 10px;
+}
+
+.comment .commentItem {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+}
+
+.comment .commentItem .author {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.comment .commentItem p {
+  font-size: 16px;
+}
+
+.heartWrapper {
+  position: absolute;
+  left: -8rem;
+  top: 6rem;
+}
+
+.fixed.heart {
+  position: fixed;
+  top: 130px;
+}
+
+.heart .heartBtn {
+  font-size: 32px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 /* 여기까지 */
 
 .p-20 {
   padding: 20px;
-}
-
-input {
-  box-sizing: border-box;
-  padding: 10px;
-  display: block;
-  margin-bottom: 10px;
-}
-
-button {
-  padding: 10px 15px;
-  background: lightgray;
-  border: none;
-  border-radius: 5px;
-}
-
-a {
-  text-decoration: none;
-  color: black;
 }
