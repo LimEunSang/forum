@@ -102,11 +102,7 @@ export default function WriteForm() {
         <button className="uncommonBtn" onClick={handleClick}>
           📷&nbsp;&nbsp;이미지 업로드
         </button>
-        {file && (
-          <span style={{ marginLeft: "10px", display: "inline" }}>
-            {file.name}
-          </span>
-        )}
+        {file && <span className="fileName">{file.name}</span>}
       </div>
       <div className="imgWrapper">{file && <img src={src} />}</div>
       <div className="btnWrapper">

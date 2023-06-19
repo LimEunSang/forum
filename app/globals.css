@@ -292,6 +292,10 @@ a {
   margin: 20px 0px;
 }
 
+.writeForm .uploadFileWrapper .fileName {
+  margin-left: 10px;
+}
+
 .writeForm .imgWrapper {
   width: 100%;
   display: flex;
