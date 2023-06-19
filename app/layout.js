@@ -32,14 +32,14 @@ export default async function RootLayout({ children }) {
                 <DarkModeBtn mode={mode && mode.value} />
                 {session ? (
                   <>
-                    <Link className="btn writeBtn" href="/write">
+                    <Link className="headerBtn writeBtn" href="/write">
                       새 글 작성
                     </Link>
                     <UserBtn userName={session.user.name} />
                   </>
                 ) : (
                   <>
-                    <Link className="btn" href="/register">
+                    <Link className="headerBtn" href="/register">
                       회원가입
                     </Link>
                     <LoginBtn />

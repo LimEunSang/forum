@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function WriteForm() {
   const [title, setTitle] = useState("");
@@ -9,6 +9,12 @@ export default function WriteForm() {
   const [imgURL, setImgURL] = useState(""); // img 저장 서버 경로
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  /* file 업로드 버튼 customizing */
+  const fileRef = useRef(null);
+  const handleClick = () => {
+    fileRef.current.click();
+  };
 
   const assignPost = () => {
     fetch("/api/post/new", {
@@ -64,23 +70,27 @@ export default function WriteForm() {
   }, [imgURL]);
 
   return (
-    <div className="p-20">
-      <h4>글 작성</h4>
+    <div className="writeForm">
       <input
+        className="titleInput"
         name="title"
-        placeholder="글 제목"
+        placeholder="제목을 입력하세요"
         onChange={(e) => {
           setTitle(e.target.value);
         }}
       />
-      <input
+      <textarea
+        className="contentInput"
         name="content"
-        placeholder="글 내용"
+        placeholder="당신의 이야기를 펼쳐보세요..."
         onChange={(e) => {
           setContent(e.target.value);
         }}
       />
       <input
+        id="imgFileInput"
+        ref={fileRef}
+        style={{ display: "none" }}
         type="file"
         accept="image/*"
         onChange={(e) => {
@@ -88,13 +98,26 @@ export default function WriteForm() {
           if (e.target.files[0]) setSrc(URL.createObjectURL(e.target.files[0]));
         }}
       />
-      {file && <img src={src} />}
-      <button
-        onClick={handleSubmit}
-        style={{ cursor: loading ? "wait" : "default" }}
-      >
-        작성
-      </button>
+      <div className="uploadFileWrapper">
+        <button className="uncommonBtn" onClick={handleClick}>
+          📷&nbsp;&nbsp;이미지 업로드
+        </button>
+        {file && (
+          <span style={{ marginLeft: "10px", display: "inline" }}>
+            {file.name}
+          </span>
+        )}
+      </div>
+      <div className="imgWrapper">{file && <img src={src} />}</div>
+      <div className="btnWrapper">
+        <button
+          className="commonBtn"
+          onClick={handleSubmit}
+          style={{ cursor: loading && "wait" }}
+        >
+          출간하기
+        </button>
+      </div>
     </div>
   );
 }

@@ -25,16 +25,6 @@ input {
   padding: 10px;
 }
 
-hr {
-  margin: 20px 0 10px;
-}
-
-.darkMode hr {
-  background: gray;
-  height: 1px;
-  border: 0;
-}
-
 a {
   text-decoration: none;
   color: black;
@@ -71,7 +61,49 @@ a {
   }
 }
 
-.btn {
+.commonBtn {
+  border: none;
+  background: #12b886;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.darkMode .commonBtn {
+  color: black;
+}
+
+.commonBtn:hover {
+  background: #63e6be;
+}
+
+.uncommonBtn {
+  border: none;
+  background: none;
+  color: #12b886;
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.darkMode .uncommonBtn {
+  color: #12b886;
+}
+
+.uncommonBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.darkMode .uncommonBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.headerBtn {
   font-size: 14px;
   border: 1px solid black;
   padding: 10px 15px;
@@ -80,17 +112,17 @@ a {
   transition: all 0.5s;
 }
 
-.darkMode .btn {
+.darkMode .headerBtn {
   color: white;
   border: 1px solid white;
 }
 
-.btn:hover {
+.headerBtn:hover {
   color: white;
   background-color: black;
 }
 
-.darkMode .btn:hover {
+.darkMode .headerBtn:hover {
   color: black;
   background-color: white;
 }
@@ -209,6 +241,79 @@ a {
   background-color: rgb(255, 255, 255, 0.1);
 }
 
+/* write */
+
+.writeForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+}
+
+.writeForm .titleInput,
+.writeForm .contentInput {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  margin: 20px 0;
+}
+
+.darkMode .writeForm .titleInput,
+.darkMode .writeForm .contentInput {
+  color: white;
+}
+
+.writeForm .titleInput:focus,
+.writeForm .contentInput:focus {
+  outline: none;
+  box-shadow: 0 0 10px royalblue;
+}
+
+.darkMode .writeForm .titleInput:focus,
+.darkMode .writeForm .contentInput:focus {
+  outline: none;
+  box-shadow: 0 0 10px #d6a8e9;
+}
+
+.writeForm .titleInput {
+  font-size: 2.75rem;
+  font-weight: bold;
+}
+
+.writeForm .contentInput {
+  height: 120px;
+  font-size: 18px;
+  resize: none;
+  padding: 10px;
+  margin: 20px 0px;
+}
+
+.writeForm .uploadFileWrapper {
+  margin: 20px 0px;
+}
+
+.writeForm .imgWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.writeForm img {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.writeForm .btnWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  margin: 40px 0;
+}
+
 /* post */
 
 .postList {
@@ -323,6 +428,16 @@ a {
   font-size: 18px;
 }
 
+.detail hr {
+  margin: 20px 0 10px;
+}
+
+.darkMode .detail hr {
+  background: gray;
+  height: 1px;
+  border: 0;
+}
+
 .comment {
   display: flex;
   flex-direction: column;
@@ -384,10 +499,4 @@ a {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px;
-}
-
-/* 여기까지 */
-
-.p-20 {
-  padding: 20px;
 }

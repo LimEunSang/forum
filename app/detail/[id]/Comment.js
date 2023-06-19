@@ -33,7 +33,7 @@ export default function Comment({ parent }) {
       />
       <div className="commentBtnBox">
         <button
-          className="btn commentBtn"
+          className="uncommonBtn commentBtn"
           onClick={() => {
             fetch("/api/comment/new", {
               method: "POST",
