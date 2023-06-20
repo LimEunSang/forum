@@ -20,35 +20,33 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={mode && mode.value == "dark" ? "darkMode" : ""}>
-        <div className="layout">
-          <div className="container">
-            <div className="header">
-              <div className="logoBox">
-                <Link className="logo" href="/">
-                  Appleforum
-                </Link>
-              </div>
-              <div className="mainMenu">
-                <DarkModeBtn mode={mode && mode.value} />
-                {session ? (
-                  <>
-                    <Link className="headerBtn writeBtn" href="/write">
-                      새 글 작성
-                    </Link>
-                    <UserBtn userName={session.user.name} />
-                  </>
-                ) : (
-                  <>
-                    <Link className="headerBtn" href="/register">
-                      회원가입
-                    </Link>
-                    <LoginBtn />
-                  </>
-                )}
-              </div>
+        <div className="container">
+          <div className="header">
+            <div className="logoBox">
+              <Link className="logo" href="/">
+                Appleforum
+              </Link>
             </div>
-            {children}
+            <div className="mainMenu">
+              <DarkModeBtn mode={mode && mode.value} />
+              {session ? (
+                <>
+                  <Link className="headerBtn writeBtn" href="/write">
+                    새 글 작성
+                  </Link>
+                  <UserBtn userName={session.user.name} />
+                </>
+              ) : (
+                <>
+                  <Link className="headerBtn" href="/register">
+                    회원가입
+                  </Link>
+                  <LoginBtn />
+                </>
+              )}
+            </div>
           </div>
+          {children}
         </div>
       </body>
     </html>

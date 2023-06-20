@@ -10,6 +10,9 @@ body {
 
 body {
   background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .darkMode {
@@ -129,14 +132,6 @@ a {
 
 .iconBtn {
   cursor: pointer;
-}
-
-/* layout */
-
-.layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* container */
@@ -400,23 +395,21 @@ a {
 
 .postList {
   margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .postItem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc(25% - 20px);
+  width: 100%;
   aspect-ratio: 5 / 4;
   background-color: white;
   box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 20px;
   opacity: 1;
   transition: opacity 1s, display 1s, transform 0.5s, box-shadow 0.5s;
 }

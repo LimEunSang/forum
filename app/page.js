@@ -22,5 +22,6 @@ export default async function Home() {
     return object;
   });
 
+  result = result.reverse(); // 최신 게시물을 앞에 위치
   return <PostList result={result} user={session.user} />;
 }
