@@ -583,3 +583,63 @@ a {
   border-radius: 10px;
   padding: 10px;
 }
+
+/* 404 */
+
+.page404 {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background-image: url("./images/404_page.jpg");
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.page404 .source {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+}
+
+.page404 .source a {
+  padding: 2.5px 5px;
+  color: gray;
+}
+
+.page404 .HomeBtn {
+  margin: 20px 0;
+}
+
+/* error */
+
+.pageError {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background-image: url("./images/error.jpeg");
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.pageError .source {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+}
+
+.pageError .source a {
+  padding: 2.5px 5px;
+  color: gray;
+}
+
+.pageError button {
+  margin: 20px 0;
+}
