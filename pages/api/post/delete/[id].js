@@ -10,20 +10,29 @@ export default async function handler(request, response) {
 
       const client = await connectDB;
       const db = client.db("forum");
+
       let findedPost = await db
         .collection("post")
         .findOne({ _id: new ObjectId(request.query.id) });
 
       if (
         session &&
-        (session.user.email == findedPost.author ||
+        (session.user.email == findedPost.author.email ||
           session.user.role == "admin")
       ) {
-        let result = await db
+        let deleteComment = await db
+          .collection("comment")
+          .deleteMany({ parent: new ObjectId(request.query.id) });
+
+        let deleteHeart = await db
+          .collection("heart")
+          .deleteMany({ postId: new ObjectId(request.query.id) });
+
+        let deletePost = await db
           .collection("post")
           .deleteOne({ _id: new ObjectId(request.query.id) });
 
-        return response.status(200).json(result);
+        return response.status(200).json(deletePost);
       } else {
         return response
           .status(500)
