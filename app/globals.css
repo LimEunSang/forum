@@ -241,6 +241,84 @@ a {
   background-color: rgb(255, 255, 255, 0.1);
 }
 
+/* register */
+
+.register {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register span {
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.register form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register form .inputField {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.register form .inputField:focus-within {
+  border-bottom: 3px solid blue;
+}
+
+.darkMode .register form .inputField:focus-within {
+  border-bottom: 3px solid dodgerblue;
+}
+
+.darkMode .register form .inputField {
+  border: 1px solid lightslategrey;
+}
+
+.register form .inputField .iconBox {
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #ccc;
+  font-size: 18px;
+}
+
+.darkMode .register form .inputField .iconBox {
+  border-right: 1px solid lightslategrey;
+}
+
+.register form input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.register form input:focus {
+  outline: none;
+}
+
+.darkMode .register form input {
+  color: white;
+}
+
+.register form .btnWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0;
+}
+
 /* write */
 
 .writeForm {
@@ -455,6 +533,7 @@ a {
   border-radius: 10px;
   margin: 10px 0px;
   padding: 16px;
+  resize: none;
 }
 
 .darkMode .comment #commentInput {
