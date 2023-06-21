@@ -10,7 +10,7 @@ export default function WriteForm() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  /* file 업로드 버튼 customizing */
+  // file upload input Ref
   const fileRef = useRef(null);
   const handleClick = () => {
     fileRef.current.click();
@@ -37,20 +37,21 @@ export default function WriteForm() {
     // 파일 업로드
     if (file) {
       let filename = encodeURIComponent(file.name);
-      let res = await fetch(`/api/post/image?file=${filename}`);
-      res = await res.json();
+      let response = await fetch(`/api/post/image?file=${filename}`);
+      response = await response.json();
 
       const formData = new FormData();
-      Object.entries({ ...res.fields, file }).forEach(([key, value]) => {
+      Object.entries({ ...response.fields, file }).forEach(([key, value]) => {
         formData.append(key, value);
       });
-      res = await fetch(res.url, {
+
+      response = await fetch(response.url, {
         method: "POST",
         body: formData,
       });
 
-      if (res.ok) {
-        setImgURL(res.url + "/" + filename);
+      if (response.ok) {
+        setImgURL(response.url + "/" + filename);
         // 이 자리에 assignPost()를 넣으면 setImgURL()가 완료되기 전에 실행됨
       } else {
         console.log("이미지 서버 업로드 실패");

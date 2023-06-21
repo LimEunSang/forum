@@ -36,6 +36,14 @@ const PostList = ({ result, user }) => {
                 <span
                   className="iconBtn"
                   onClick={(e) => {
+                    // s3 서버 업로드 된 이미지 삭제
+                    // 단, 이미지가 등록됐을 때만 실행
+                    object.imgURL &&
+                      fetch(`/api/post/image/?file=${object.imgURL}`, {
+                        method: "DELETE",
+                      });
+
+                    // 게시물 삭제
                     fetch("/api/post/delete/" + object._id, {
                       method: "DELETE",
                     })
@@ -49,7 +57,6 @@ const PostList = ({ result, user }) => {
                         }
                       })
                       .then((data) => {
-                        // 성공 시 실행할 코드
                         e.target.parentElement.parentElement.parentElement.style.opacity = 0;
                         setTimeout(() => {
                           e.target.parentElement.parentElement.parentElement.style.display =
@@ -57,7 +64,6 @@ const PostList = ({ result, user }) => {
                         }, 1000);
                       })
                       .catch((error) => {
-                        // 실패 시 실행할 코드
                         alert(error.message);
                       });
                   }}
