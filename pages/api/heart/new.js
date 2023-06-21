@@ -4,7 +4,7 @@ import { authOptions } from "../auth/[...nextauth]";
 import { ObjectId } from "mongodb";
 
 export default async function handler(request, response) {
-  let session = await getServerSession(request, response, authOptions);
+  const session = await getServerSession(request, response, authOptions);
   if (request.method == "POST") {
     try {
       if (!session) {
@@ -16,14 +16,14 @@ export default async function handler(request, response) {
       // console.log(session);
       // console.log(request.body);
 
-      let data = {
+      const data = {
         userId: new ObjectId(session.user.id),
         postId: new ObjectId(request.body),
       };
 
       const client = await connectDB;
       const db = client.db("forum");
-      let result = await db.collection("heart").insertOne(data);
+      const result = await db.collection("heart").insertOne(data);
       return response.status(200).json(result);
     } catch (error) {
       return response.status(500).json({ error: "DB 연결 실패" });

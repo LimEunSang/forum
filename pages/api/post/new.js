@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(request, response) {
-  let session = await getServerSession(request, response, authOptions);
+  const session = await getServerSession(request, response, authOptions);
   if (request.method == "POST") {
     request.body = JSON.parse(request.body);
 
@@ -26,7 +26,7 @@ export default async function handler(request, response) {
     try {
       const client = await connectDB;
       const db = client.db("forum");
-      let result = await db.collection("post").insertOne(request.body);
+      const result = await db.collection("post").insertOne(request.body);
 
       return response.status(200).json(result);
     } catch (error) {

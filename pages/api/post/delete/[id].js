@@ -6,12 +6,12 @@ import { authOptions } from "../../auth/[...nextauth]";
 export default async function handler(request, response) {
   if (request.method == "DELETE") {
     try {
-      let session = await getServerSession(request, response, authOptions);
+      const session = await getServerSession(request, response, authOptions);
 
       const client = await connectDB;
       const db = client.db("forum");
 
-      let findedPost = await db
+      const findedPost = await db
         .collection("post")
         .findOne({ _id: new ObjectId(request.query.id) });
 
@@ -20,15 +20,15 @@ export default async function handler(request, response) {
         (session.user.email == findedPost.author.email ||
           session.user.role == "admin")
       ) {
-        let deleteComment = await db
+        const deleteComment = await db
           .collection("comment")
           .deleteMany({ parent: new ObjectId(request.query.id) });
 
-        let deleteHeart = await db
+        const deleteHeart = await db
           .collection("heart")
           .deleteMany({ postId: new ObjectId(request.query.id) });
 
-        let deletePost = await db
+        const deletePost = await db
           .collection("post")
           .deleteOne({ _id: new ObjectId(request.query.id) });
 

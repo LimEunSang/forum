@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 const Detail = async (props) => {
   const client = await connectDB;
   const db = client.db("forum");
-  let result = await db.collection("post").findOne({
+  const result = await db.collection("post").findOne({
     _id: new ObjectId(props.params.id),
   });
 

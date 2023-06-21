@@ -6,12 +6,12 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  let session = await getServerSession(authOptions);
-  if (!session) session = { user: { name: "", email: "", id: "", role: "" } };
+  const session = await getServerSession(authOptions);
 
   const client = await connectDB;
   const db = client.db("forum");
   let result = await db.collection("post").find().toArray();
+  result = result.reverse(); // 최신 게시물을 앞에 위치
 
   // Warning: Only plain objects can be passed to Client Components from Server Components.
   //          Objects with toJSON methods are not supported.
@@ -22,6 +22,5 @@ export default async function Home() {
     return object;
   });
 
-  result = result.reverse(); // 최신 게시물을 앞에 위치
-  return <PostList result={result} user={session.user} />;
+  return <PostList result={result} user={session && session.user} />;
 }

@@ -13,15 +13,17 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  let session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-  let mode = cookies().get("mode");
+  const mode = cookies().get("mode");
 
   return (
     <html lang="en">
       <body
         className={
-          mode && mode.value == "dark" ? "darkMode" : "vsc-initialized"
+          mode && mode.value == "dark"
+            ? "darkMode vsc-initialized"
+            : "vsc-initialized"
           // vsc-initialized ➔ 첫 페이지 로드 시 서버가 생성한 className. 없으면 클라이언트에서 생성한 className과 다르다는 경고문 뜸
         }
       >

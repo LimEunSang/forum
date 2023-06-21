@@ -6,7 +6,7 @@ export default async function handler(request, response) {
     try {
       const client = await connectDB;
       const db = client.db("forum");
-      let result = await db
+      const result = await db
         .collection("comment")
         .find({ parent: new ObjectId(request.query.parent) })
         .toArray();

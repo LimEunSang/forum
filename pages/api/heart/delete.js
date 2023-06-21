@@ -4,12 +4,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(request, response) {
-  let session = await getServerSession(request, response, authOptions);
+  const session = await getServerSession(request, response, authOptions);
   if (request.method == "DELETE") {
     try {
       const client = await connectDB;
       const db = client.db("forum");
-      let result = await db.collection("heart").deleteOne({
+      const result = await db.collection("heart").deleteOne({
         userId: new ObjectId(session.user.id),
         postId: new ObjectId(request.body),
       });

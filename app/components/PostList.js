@@ -28,50 +28,51 @@ const PostList = ({ result, user }) => {
               <span>•</span>
               <span>{timeForToday(object.creationDate)}</span>
             </div>
-            {(user.role == "admin" || user.email == object.author.email) && (
-              <div className="iconBtnBox">
-                <Link prefetch={false} href={"/edit/" + object._id}>
-                  📝
-                </Link>
-                <span
-                  className="iconBtn"
-                  onClick={(e) => {
-                    // s3 서버 업로드 된 이미지 삭제
-                    // 단, 이미지가 등록됐을 때만 실행
-                    object.imgURL &&
-                      fetch(`/api/post/image/?file=${object.imgURL}`, {
-                        method: "DELETE",
-                      });
+            {user &&
+              (user.role == "admin" || user.email == object.author.email) && (
+                <div className="iconBtnBox">
+                  <Link prefetch={false} href={"/edit/" + object._id}>
+                    📝
+                  </Link>
+                  <span
+                    className="iconBtn"
+                    onClick={(e) => {
+                      // s3 서버 업로드 된 이미지 삭제
+                      // 단, 이미지가 등록됐을 때만 실행
+                      object.imgURL &&
+                        fetch(`/api/post/image/?file=${object.imgURL}`, {
+                          method: "DELETE",
+                        });
 
-                    // 게시물 삭제
-                    fetch("/api/post/delete/" + object._id, {
-                      method: "DELETE",
-                    })
-                      .then((response) => {
-                        if (response.status == 200) {
-                          return response.json();
-                        } else {
-                          return response.json().then((error) => {
-                            throw new Error(error.error);
-                          });
-                        }
+                      // 게시물 삭제
+                      fetch("/api/post/delete/" + object._id, {
+                        method: "DELETE",
                       })
-                      .then((data) => {
-                        e.target.parentElement.parentElement.parentElement.style.opacity = 0;
-                        setTimeout(() => {
-                          e.target.parentElement.parentElement.parentElement.style.display =
-                            "none";
-                        }, 1000);
-                      })
-                      .catch((error) => {
-                        alert(error.message);
-                      });
-                  }}
-                >
-                  🗑️
-                </span>
-              </div>
-            )}
+                        .then((response) => {
+                          if (response.status == 200) {
+                            return response.json();
+                          } else {
+                            return response.json().then((error) => {
+                              throw new Error(error.error);
+                            });
+                          }
+                        })
+                        .then((data) => {
+                          e.target.parentElement.parentElement.parentElement.style.opacity = 0;
+                          setTimeout(() => {
+                            e.target.parentElement.parentElement.parentElement.style.display =
+                              "none";
+                          }, 1000);
+                        })
+                        .catch((error) => {
+                          alert(error.message);
+                        });
+                    }}
+                  >
+                    🗑️
+                  </span>
+                </div>
+              )}
           </div>
         </div>
       ))}

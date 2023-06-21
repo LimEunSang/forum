@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Loading from "@/app/components/Loading";
 
 export default function Comment({ parent }) {
-  let [comment, setComment] = useState("");
-  let [data, setData] = useState([]);
-  let [loading, setLoading] = useState(true);
+  const [comment, setComment] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getData = () => {
     fetch(`/api/comment/list?parent=${parent}`)

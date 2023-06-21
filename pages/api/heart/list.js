@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export default async function handler(request, response) {
-  let session = await getServerSession(request, response, authOptions);
+  const session = await getServerSession(request, response, authOptions);
   if (request.method == "GET") {
     try {
       if (!session) {
@@ -13,7 +13,7 @@ export default async function handler(request, response) {
 
       const client = await connectDB;
       const db = client.db("forum");
-      let result = await db.collection("heart").findOne({
+      const result = await db.collection("heart").findOne({
         userId: new ObjectId(session.user.id),
         postId: new ObjectId(request.query.parent),
       });

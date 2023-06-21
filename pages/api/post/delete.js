@@ -8,7 +8,7 @@ export default async function handler(request, response) {
 
       const client = await connectDB;
       const db = client.db("forum");
-      let result = await db
+      const result = await db
         .collection("post")
         .deleteOne({ _id: new ObjectId(request.body) });
 

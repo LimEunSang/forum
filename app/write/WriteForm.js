@@ -36,7 +36,7 @@ export default function WriteForm() {
 
     // 파일 업로드
     if (file) {
-      let filename = encodeURIComponent(file.name);
+      const filename = encodeURIComponent(file.name);
       let response = await fetch(`/api/post/image?file=${filename}`);
       response = await response.json();
 

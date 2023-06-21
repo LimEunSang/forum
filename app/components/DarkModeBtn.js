@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function DarkModeBtn({ mode }) {
-  let router = useRouter();
+  const router = useRouter();
 
   const modeBtnHandler = () => {
     const opposite = mode === "dark" ? "light" : "dark";
