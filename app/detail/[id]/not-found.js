@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-/* 존재하지 않는 페이지에 접근했을 때 나타나는 페이지 */
+// 존재하지 않는 페이지에 접근했을 때 나타나는 페이지
 export default function NotFound() {
   return (
     <div className="page404">

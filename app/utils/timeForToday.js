@@ -2,6 +2,7 @@ export const timeForToday = (value) => {
   const today = new Date();
   const timeValue = new Date(value);
 
+  // 단위: 분(minute)
   const betweenTime = Math.floor(
     (today.getTime() - timeValue.getTime()) / 1000 / 60
   );

@@ -16,6 +16,7 @@ export default async function handler(request, response) {
           { _id: new ObjectId(request.body._id) },
           { $set: { title: request.body.title, content: request.body.content } }
         );
+
       response.redirect(302, "/list");
     } catch (error) {
       return response.status(500).json(error);

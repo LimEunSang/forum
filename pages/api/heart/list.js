@@ -17,6 +17,7 @@ export default async function handler(request, response) {
         userId: new ObjectId(session.user.id),
         postId: new ObjectId(request.query.parent),
       });
+
       return response.status(200).json(result);
     } catch (error) {
       return response.status(500).json({ error: "DB 연결 실패" });

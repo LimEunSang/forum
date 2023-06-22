@@ -34,6 +34,7 @@ export default async function handler(request, response) {
       }
     });
 
+    // 비밀번호 암호화
     const hash = await bcrypt.hash(request.body.password, 10);
     request.body.password = hash;
 

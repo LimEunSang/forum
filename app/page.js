@@ -13,10 +13,8 @@ export default async function Home() {
   let result = await db.collection("post").find().toArray();
   result = result.reverse(); // 최신 게시물을 앞에 위치
 
-  // Warning: Only plain objects can be passed to Client Components from Server Components.
-  //          Objects with toJSON methods are not supported.
-  //          Convert it manually to a simple value before passing it to props.
-  //          {_id: {}, title: ..., content: ...}
+  /* server에서 client로 ObjectId 자료형 객체를 전달할 때 경고문 발생
+     → string 자료형으로 변환하여 전달 */
   result = result.map((object) => {
     object._id = object._id.toString();
     return object;

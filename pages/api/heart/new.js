@@ -13,9 +13,6 @@ export default async function handler(request, response) {
           .json({ error: "로그인 후 사용할 수 있습니다" });
       }
 
-      // console.log(session);
-      // console.log(request.body);
-
       const data = {
         userId: new ObjectId(session.user.id),
         postId: new ObjectId(request.body),
@@ -24,6 +21,7 @@ export default async function handler(request, response) {
       const client = await connectDB;
       const db = client.db("forum");
       const result = await db.collection("heart").insertOne(data);
+
       return response.status(200).json(result);
     } catch (error) {
       return response.status(500).json({ error: "DB 연결 실패" });

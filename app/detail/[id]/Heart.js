@@ -29,7 +29,8 @@ export default function Heart({ parent }) {
   };
 
   const handleScroll = () => {
-    setScrollY(window.pageYOffset); // scroll 값 저장
+    // scroll 값 저장
+    setScrollY(window.pageYOffset);
   };
 
   // scroll 값을 실시간 감시
@@ -63,15 +64,11 @@ export default function Heart({ parent }) {
                 .then((response) => {
                   if (response.status == 200) {
                     setIsHeart(!isHeart);
-                    return response.json();
                   } else {
                     return response.json().then((error) => {
                       throw new Error(error.error);
                     });
                   }
-                })
-                .then((data) => {
-                  // console.log(data);
                 })
                 .catch((error) => {
                   alert(error.message);
@@ -89,15 +86,11 @@ export default function Heart({ parent }) {
                 .then((response) => {
                   if (response.status == 200) {
                     setIsHeart(!isHeart);
-                    return response.json();
                   } else {
                     return response.json().then((error) => {
                       throw new Error(error.error);
                     });
                   }
-                })
-                .then((data) => {
-                  // console.log(data);
                 })
                 .catch((error) => {
                   alert(error.message);

@@ -1,8 +1,11 @@
 "use client";
 
-/* 서버가 다운되거나 DB 데이터 조회에 실패할 때 나타나는 페이지 */
-/* 에러 메시지 출력: props.error */
+// 서버가 다운되거나 DB 데이터 조회에 실패할 때 나타나는 페이지
 export default function Error({ error, reset }) {
+  /* [props]
+     에러 메시지 출력: props.error
+     새로고침 func: reset() */
+
   return (
     <div className="pageError">
       <div className="source">

@@ -19,14 +19,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body
-        className={
-          mode && mode.value == "dark"
-            ? "darkMode vsc-initialized"
-            : "vsc-initialized"
-          // vsc-initialized ➔ 첫 페이지 로드 시 서버가 생성한 className. 없으면 클라이언트에서 생성한 className과 다르다는 경고문 뜸
-        }
-      >
+      <body className={mode && mode.value == "dark" ? "darkMode" : ""}>
         <div className="container">
           <div className="header">
             <div className="logoBox">

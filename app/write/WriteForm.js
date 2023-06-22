@@ -52,7 +52,7 @@ export default function WriteForm() {
 
       if (response.ok) {
         setImgURL(response.url + "/" + filename);
-        // 이 자리에 assignPost()를 넣으면 setImgURL()가 완료되기 전에 실행됨
+        // ⬅︎ 이 자리에 assignPost()를 넣으면 setImgURL()가 완료되기 전에 실행됨
       } else {
         console.log("이미지 서버 업로드 실패");
       }
