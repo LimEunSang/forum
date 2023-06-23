@@ -10,24 +10,17 @@ export default function Heart({ parent }) {
 
   const getData = () => {
     fetch(`/api/heart/list?parent=${parent}`)
-      .then((response) => {
-        if (response.status == 200) {
-          return response.json();
-        } else {
-          return response.json().then((error) => {
-            throw new Error(error.error);
-          });
-        }
-      })
+      .then((response) => response.json())
       .then((data) => {
         if (data) setIsHeart(true);
         setLoading(false);
       })
       .catch((error) => {
-        alert(error.message);
+        console(error);
       });
   };
 
+  // cf. scroll 시 fix - https://wazacs.tistory.com/28, https://wazacs.tistory.com/30
   const handleScroll = () => {
     // scroll 값 저장
     setScrollY(window.pageYOffset);
@@ -46,7 +39,28 @@ export default function Heart({ parent }) {
     };
   });
 
-  // cf. scroll 시 fix - https://wazacs.tistory.com/28, https://wazacs.tistory.com/30
+  // HeartBtn Component
+  const HeartBtn = () => {
+    const btn = isHeart ? "💖" : "🤍";
+    const address = isHeart ? "delete" : "new";
+    const method = isHeart ? "DELETE" : "POST";
+
+    const HeartBtnHandler = () => {
+      fetch(`/api/heart/${address}`, { method: method, body: parent })
+        .then(() => {
+          setIsHeart(!isHeart);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    return (
+      <button className="heartBtn" onClick={HeartBtnHandler}>
+        {btn}
+      </button>
+    );
+  };
 
   useEffect(() => {
     getData();
@@ -55,51 +69,7 @@ export default function Heart({ parent }) {
   return (
     <div className="heartWrapper">
       <div className={scrollY > 210 ? "fixed heart" : "heart"}>
-        {loading && <Loading />}
-        {!loading && isHeart && (
-          <button
-            className="heartBtn"
-            onClick={() => {
-              fetch("/api/heart/delete", { method: "DELETE", body: parent })
-                .then((response) => {
-                  if (response.status == 200) {
-                    setIsHeart(!isHeart);
-                  } else {
-                    return response.json().then((error) => {
-                      throw new Error(error.error);
-                    });
-                  }
-                })
-                .catch((error) => {
-                  alert(error.message);
-                });
-            }}
-          >
-            💖
-          </button>
-        )}
-        {!loading && !isHeart && (
-          <button
-            className="heartBtn"
-            onClick={() => {
-              fetch("/api/heart/new", { method: "POST", body: parent })
-                .then((response) => {
-                  if (response.status == 200) {
-                    setIsHeart(!isHeart);
-                  } else {
-                    return response.json().then((error) => {
-                      throw new Error(error.error);
-                    });
-                  }
-                })
-                .catch((error) => {
-                  alert(error.message);
-                });
-            }}
-          >
-            🤍
-          </button>
-        )}
+        {loading ? <Loading /> : <HeartBtn />}
       </div>
     </div>
   );

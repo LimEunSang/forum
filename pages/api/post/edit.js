@@ -1,15 +1,33 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(request, response) {
   if (request.method == "POST") {
-    if (request.body.title == "" || request.body.content == "") {
-      return response.status(400).json("제목이나 내용 작성해라");
-    }
-
     try {
+      const session = await getServerSession(request, response, authOptions);
+      if (!session) return response.status(401).json();
+
       const client = await connectDB;
       const db = client.db("forum");
+
+      const findedPost = await db
+        .collection("post")
+        .findOne({ _id: new ObjectId(request.body._id) });
+
+      // 관리자, 작성자가 아닌 경우 수정 거부
+      if (
+        session.user.role != "admin" &&
+        session.user.email != findedPost.author.email
+      ) {
+        return response.status(403).json();
+      }
+
+      if (!request.body.title || !request.body.content) {
+        return response.status(400).json();
+      }
+
       const result = await db
         .collection("post")
         .updateOne(
@@ -17,9 +35,9 @@ export default async function handler(request, response) {
           { $set: { title: request.body.title, content: request.body.content } }
         );
 
-      response.redirect(302, "/list");
+      return response.redirect(302, `/detail/${request.body._id}`);
     } catch (error) {
-      return response.status(500).json(error);
+      return response.status(500).json();
     }
   }
 }

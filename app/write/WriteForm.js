@@ -28,7 +28,7 @@ export default function WriteForm() {
       .then((response) => {
         if (response.status == 200) window.location.replace("/");
       })
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = async () => {

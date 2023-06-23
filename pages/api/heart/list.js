@@ -4,12 +4,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export default async function handler(request, response) {
-  const session = await getServerSession(request, response, authOptions);
   if (request.method == "GET") {
     try {
-      if (!session) {
-        return response.status(200).json(null);
-      }
+      const session = await getServerSession(request, response, authOptions);
+      if (!session) return response.status(401).json();
 
       const client = await connectDB;
       const db = client.db("forum");
@@ -20,7 +18,7 @@ export default async function handler(request, response) {
 
       return response.status(200).json(result);
     } catch (error) {
-      return response.status(500).json({ error: "DB 연결 실패" });
+      return response.status(500).json();
     }
   }
 }

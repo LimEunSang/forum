@@ -3,8 +3,12 @@ import { ObjectId } from "mongodb";
 import Comment from "./Comment";
 import Heart from "./Heart";
 import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 const Detail = async (props) => {
+  const session = await getServerSession(authOptions);
+
   const client = await connectDB;
   const db = client.db("forum");
   const result = await db.collection("post").findOne({
@@ -23,8 +27,8 @@ const Detail = async (props) => {
       )}
       <p>{result.content}</p>
       <hr />
-      <Comment parent={result._id.toString()} />
-      <Heart parent={result._id.toString()} />
+      <Comment parent={result._id.toString()} session={session} />
+      {session && <Heart parent={result._id.toString()} />}
     </div>
   );
 };

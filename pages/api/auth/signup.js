@@ -1,8 +1,11 @@
 import { connectDB } from "@/util/database";
 import bcrypt from "bcrypt";
 
+// 회원 정보에 role 추가하는 함수
 export const assignRole = (object) => {
-  const adminList = ["dmstkd2905@naver.com", "dmstkd2905@gmail.com"];
+  const adminList = ["dmstkd2905@naver.com", "dmstkd2905@gmail.com"]; // 관리자 email list
+  /* 관리자 email list에 해당하는 email일 경우 role = admin
+     해당하지 않을 경우 role = normal */
   if (adminList.includes(object.email)) {
     object.role = "admin";
   } else {
@@ -12,36 +15,41 @@ export const assignRole = (object) => {
 
 export default async function handler(request, response) {
   if (request.method == "POST") {
-    // 이름, 이메일, 비밀번호 입력 란에 빈칸을 보내는 경우 가입 거절
-    if (
-      request.body.name == "" ||
-      request.body.email == "" ||
-      request.body.password == ""
-    ) {
-      return response
-        .status(500)
-        .json("이름/이메일/비밀번호는 빈 문자열일 수 없습니다");
-    }
-
-    const client = await connectDB;
-    const db = client.db("forum");
-
-    // 이메일 중복 체크
-    const result = await db.collection("user_cred").find().toArray();
-    result.map((user) => {
-      if (user.email == request.body.email) {
-        return response.status(500).json("이미 존재하는 이메일입니다");
+    try {
+      if (!request.body.name || !request.body.email || !request.body.password) {
+        return response.send(
+          "<script>alert('Error: empty content'); window.location.replace('/register');</script>"
+        );
       }
-    });
 
-    // 비밀번호 암호화
-    const hash = await bcrypt.hash(request.body.password, 10);
-    request.body.password = hash;
+      const client = await connectDB;
+      const db = client.db("forum");
 
-    assignRole(request.body);
+      // 중복 이메일 검사
+      const result = await db
+        .collection("user_cred")
+        .findOne({ email: request.body.email });
 
-    await db.collection("user_cred").insertOne(request.body);
+      if (result) {
+        return response.send(
+          "<script>alert('Error: email duplication'); window.location.replace('/register');</script>"
+        );
+      }
 
-    return response.status(200).json({ message: "회원가입 완료" });
+      const hash = await bcrypt.hash(request.body.password, 10);
+      request.body.password = hash;
+
+      assignRole(request.body);
+
+      await db.collection("user_cred").insertOne(request.body);
+
+      return response.send(
+        "<script>alert('Complete registration'); window.location.replace('/');</script>"
+      );
+    } catch {
+      return response.send(
+        "<script>alert('Error: server error'); window.location.replace('/register');</script>"
+      );
+    }
   }
 }

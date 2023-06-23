@@ -45,21 +45,15 @@ export default function PostItem({ object, user }) {
                   fetch("/api/post/delete/" + object._id, {
                     method: "DELETE",
                   })
-                    .then((response) => {
-                      if (response.status == 200) {
-                        e.target.parentElement.parentElement.parentElement.style.opacity = 0;
-                        setTimeout(() => {
-                          e.target.parentElement.parentElement.parentElement.style.display =
-                            "none";
-                        }, 1000);
-                      } else {
-                        return response.json().then((error) => {
-                          throw new Error(error.error);
-                        });
-                      }
+                    .then(() => {
+                      e.target.parentElement.parentElement.parentElement.style.opacity = 0;
+                      setTimeout(() => {
+                        e.target.parentElement.parentElement.parentElement.style.display =
+                          "none";
+                      }, 1000);
                     })
                     .catch((error) => {
-                      alert(error.message);
+                      console.log(error);
                     });
                 }}
               >

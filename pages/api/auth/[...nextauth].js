@@ -50,9 +50,9 @@ export const authOptions = {
     }),
   ],
 
-  // 3. jwt 만료일설정
+  // 3. jwt 써놔야 잘 됩니다 + jwt 만료일설정
   session: {
-    strategy: "jwt", // "jwt" 명시 필수
+    strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30일
   },
 
@@ -74,7 +74,7 @@ export const authOptions = {
     },
     // 5. 유저 세션이 조회될 때마다 실행되는 코드
     session: async ({ session, token }) => {
-      /* cf. [소셜로그인 시 console.log(token)]
+      /* cf. [Github 소셜로그인 시 console.log(token)]
          name: 'LimEunSang',
          email: 'dmstkd2905@naver.com',
          picture: 'https://avatars.githubusercontent.com/u/86942472?v=4',

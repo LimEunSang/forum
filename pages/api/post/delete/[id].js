@@ -7,6 +7,7 @@ export default async function handler(request, response) {
   if (request.method == "DELETE") {
     try {
       const session = await getServerSession(request, response, authOptions);
+      if (!session) return response.status(401).json();
 
       const client = await connectDB;
       const db = client.db("forum");
@@ -15,31 +16,29 @@ export default async function handler(request, response) {
         .collection("post")
         .findOne({ _id: new ObjectId(request.query.id) });
 
+      // 관리자, 작성자가 아닌 경우 삭제 거부
       if (
-        session &&
-        (session.user.email == findedPost.author.email ||
-          session.user.role == "admin")
+        session.user.role != "admin" &&
+        session.user.email != findedPost.author.email
       ) {
-        const deleteComment = await db
-          .collection("comment")
-          .deleteMany({ parent: new ObjectId(request.query.id) });
-
-        const deleteHeart = await db
-          .collection("heart")
-          .deleteMany({ postId: new ObjectId(request.query.id) });
-
-        const deletePost = await db
-          .collection("post")
-          .deleteOne({ _id: new ObjectId(request.query.id) });
-
-        return response.status(200).json(deletePost);
-      } else {
-        return response
-          .status(500)
-          .json({ error: "작성자만 게시물을 삭제할 수 있습니다!" });
+        return response.status(403).json();
       }
+
+      const deleteComment = await db
+        .collection("comment")
+        .deleteMany({ parent: new ObjectId(request.query.id) });
+
+      const deleteHeart = await db
+        .collection("heart")
+        .deleteMany({ postId: new ObjectId(request.query.id) });
+
+      const deletePost = await db
+        .collection("post")
+        .deleteOne({ _id: new ObjectId(request.query.id) });
+
+      return response.status(200).json();
     } catch (error) {
-      return response.status(500).json({ error: "DB 연결에 실패하였습니다!" });
+      return response.status(500).json();
     }
   }
 }

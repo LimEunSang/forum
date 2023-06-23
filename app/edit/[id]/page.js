@@ -24,7 +24,7 @@ export default async function Edit(props) {
         <input
           style={{ display: "none" }}
           name="_id"
-          value={result._id.toString()}
+          defaultValue={result._id.toString()}
         />
         <div className="btnWrapper">
           <button className="commonBtn" type="submit">
