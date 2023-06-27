@@ -7,7 +7,7 @@ export default async function handler(request, response) {
   if (request.method == "POST") {
     try {
       const session = await getServerSession(request, response, authOptions);
-      if (!session) return response.status(401).json();
+      if (!session) return response.redirect(302, "/api/auth/signin");
 
       const client = await connectDB;
       const db = client.db("forum");
