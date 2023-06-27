@@ -45,12 +45,14 @@ export default function PostItem({ object, user }) {
                   fetch("/api/post/delete/" + object._id, {
                     method: "DELETE",
                   })
-                    .then(() => {
-                      e.target.parentElement.parentElement.parentElement.style.opacity = 0;
-                      setTimeout(() => {
-                        e.target.parentElement.parentElement.parentElement.style.display =
-                          "none";
-                      }, 1000);
+                    .then((response) => {
+                      if (response.status == 200) {
+                        e.target.parentElement.parentElement.parentElement.style.opacity = 0;
+                        setTimeout(() => {
+                          e.target.parentElement.parentElement.parentElement.style.display =
+                            "none";
+                        }, 1000);
+                      }
                     })
                     .catch((error) => {
                       console.log(error);

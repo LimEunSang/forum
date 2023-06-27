@@ -43,10 +43,12 @@ export default function Comment({ parent, session }) {
                   method: "POST",
                   body: JSON.stringify({ comment: comment, parent: parent }),
                 })
-                  .then(() => {
-                    getData();
-                    document.getElementById("commentInput").value = "";
-                    setComment("");
+                  .then((response) => {
+                    if (response.status == 200) {
+                      getData();
+                      document.getElementById("commentInput").value = "";
+                      setComment("");
+                    }
                   })
                   .catch((error) => {
                     console.log(error);

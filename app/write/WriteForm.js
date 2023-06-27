@@ -26,7 +26,9 @@ export default function WriteForm() {
       }),
     })
       .then((response) => {
-        if (response.status == 200) window.location.replace("/");
+        if (response.status == 200) {
+          window.location.replace("/");
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -38,7 +40,7 @@ export default function WriteForm() {
     if (file) {
       const filename = encodeURIComponent(file.name);
       let response = await fetch(`/api/post/image?file=${filename}`);
-      response = await response.json();
+      if (response.status == 200) response = await response.json();
 
       const formData = new FormData();
       Object.entries({ ...response.fields, file }).forEach(([key, value]) => {

@@ -47,8 +47,10 @@ export default function Heart({ parent }) {
 
     const HeartBtnHandler = () => {
       fetch(`/api/heart/${address}`, { method: method, body: parent })
-        .then(() => {
-          setIsHeart(!isHeart);
+        .then((response) => {
+          if (response.status == 200) {
+            setIsHeart(!isHeart);
+          }
         })
         .catch((error) => {
           console.log(error);
