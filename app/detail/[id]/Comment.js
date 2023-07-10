@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Loading from "@/app/components/Loading";
+import CommentWrite from "./CommentWrite";
+import CommentList from "./CommentList";
 
 export default function Comment({ parent, session }) {
-  const [comment, setComment] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,49 +27,14 @@ export default function Comment({ parent, session }) {
 
   return (
     <div className="comment">
-      {session && (
-        <>
-          <textarea
-            id="commentInput"
-            placeholder="댓글을 작성하세요"
-            onChange={(e) => {
-              setComment(e.target.value);
-            }}
-          />
-          <div className="commentBtnBox">
-            <button
-              className="uncommonBtn commentBtn"
-              onClick={() => {
-                fetch("/api/comment/new", {
-                  method: "POST",
-                  body: JSON.stringify({ comment: comment, parent: parent }),
-                })
-                  .then((response) => {
-                    if (response.status == 200) {
-                      getData();
-                      document.getElementById("commentInput").value = "";
-                      setComment("");
-                    }
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
-              }}
-            >
-              댓글 작성
-            </button>
-          </div>
-        </>
-      )}
-      {!loading ? (
-        data.map((item, key) => (
-          <div className="commentItem" key={key}>
-            <p className="author">{item.author}</p>
-            <p className="content">{item.comment}</p>
-          </div>
-        ))
-      ) : (
+      {/* 댓글 작성 */}
+      {<CommentWrite parent={parent} getData={getData} session={session} />}
+
+      {/* 댓글 목록 */}
+      {loading ? (
         <Loading />
+      ) : (
+        <CommentList data={data} getData={getData} session={session} />
       )}
     </div>
   );

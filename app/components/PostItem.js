@@ -7,8 +7,13 @@ import { timeForToday } from "../utils/timeForToday";
 export default function PostItem({ object, user }) {
   const router = useRouter();
 
+  const authorityCheck = () => {
+    if (!user) return false;
+    return user.role == "admin" || user.email == object.author.email;
+  };
+
   return (
-    <div className="postItem">
+    <div className="postItem" id="postItem">
       <div
         className="contentBox"
         onClick={() => {
@@ -26,43 +31,47 @@ export default function PostItem({ object, user }) {
           <span>•</span>
           <span>{timeForToday(object.creationDate)}</span>
         </div>
-        {user &&
-          (user.role == "admin" || user.email == object.author.email) && (
-            <div className="iconBtnBox">
-              <Link prefetch={false} href={"/edit/" + object._id}>
-                📝
-              </Link>
-              <span
-                className="iconBtn"
-                onClick={(e) => {
-                  // s3 서버 업로드 된 이미지 삭제
-                  object.imgURL &&
-                    fetch(`/api/post/image/?file=${object.imgURL}`, {
-                      method: "DELETE",
-                    });
-
-                  // 게시물 삭제
-                  fetch("/api/post/delete/" + object._id, {
+        {authorityCheck() && (
+          <div className="iconBtnBox">
+            <Link
+              className="iconBtn"
+              prefetch={false}
+              href={"/edit/" + object._id}
+            >
+              📝
+            </Link>
+            <span
+              className="iconBtn"
+              onClick={(e) => {
+                // s3 서버 업로드 된 이미지 삭제
+                object.imgURL &&
+                  fetch(`/api/post/image/?file=${object.imgURL}`, {
                     method: "DELETE",
+                  });
+
+                // 게시물 삭제
+                fetch("/api/post/delete/" + object._id, {
+                  method: "DELETE",
+                })
+                  .then((response) => {
+                    if (response.status == 200) {
+                      // e.target.parentElement.parentElement.parentElement.style.opacity = 0;
+                      document.getElementById("postItem").style.opacity = 0;
+                      setTimeout(() => {
+                        document.getElementById("postItem").style.display =
+                          "none";
+                      }, 1000);
+                    }
                   })
-                    .then((response) => {
-                      if (response.status == 200) {
-                        e.target.parentElement.parentElement.parentElement.style.opacity = 0;
-                        setTimeout(() => {
-                          e.target.parentElement.parentElement.parentElement.style.display =
-                            "none";
-                        }, 1000);
-                      }
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                    });
-                }}
-              >
-                🗑️
-              </span>
-            </div>
-          )}
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }}
+            >
+              🗑️
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

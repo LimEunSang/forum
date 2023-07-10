@@ -22,6 +22,7 @@ body {
 
 button {
   background-color: transparent;
+  border: none;
 }
 
 input {
@@ -130,10 +131,6 @@ a {
   background-color: white;
 }
 
-.iconBtn {
-  cursor: pointer;
-}
-
 /* container */
 
 .container {
@@ -180,6 +177,7 @@ a {
   padding: 7px;
   border-radius: 5px;
   margin-right: 10px;
+  cursor: pointer;
   transition: transform 0.5s;
 }
 
@@ -193,11 +191,11 @@ a {
 
 .userBtn {
   position: relative;
+  cursor: pointer;
 }
 
 .user {
   padding: 10px;
-  cursor: pointer;
 }
 
 .user .arrow {
@@ -475,6 +473,16 @@ a {
   flex-direction: row;
 }
 
+.postItem .infoBox .iconBtnBox .iconBtn {
+  padding: 4px;
+  border-radius: 45%;
+  cursor: pointer;
+}
+
+.postItem .infoBox .iconBtnBox .iconBtn:hover {
+  background-color: #ececec;
+}
+
 /* detail */
 
 .detail {
@@ -515,13 +523,14 @@ a {
   border: 0;
 }
 
+/* detail - comment */
+
 .comment {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
-.comment #commentInput {
+.commentWrite #commentInput {
   width: 100%;
   height: 14vh;
   font-size: 18px;
@@ -531,34 +540,56 @@ a {
   resize: none;
 }
 
-.darkMode .comment #commentInput {
+.darkMode .commentWrite #commentInput {
   background-color: #202020;
   color: white;
 }
 
-.comment .commentBtnBox {
+.commentWrite .commentBtnBox {
   display: flex;
   width: 100%;
   justify-content: flex-end;
 }
 
-.comment .commentBtn {
-  margin-top: 10px;
+.commentWrite .commentBtn,
+.commentWrite .cancelBtn {
+  margin: 10px 0 0 8px;
 }
 
-.comment .commentItem {
+.commentItem {
   width: 100%;
   margin-top: 10px;
   display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+  opacity: 1;
+  transition: opacity 1s;
 }
 
-.comment .commentItem .author {
+.commentItem .wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commentItem .author {
   font-weight: bold;
-  margin-right: 10px;
 }
 
-.comment .commentItem p {
+.commentItem .commentManage span {
+  margin-left: 8px;
+  color: #acacac;
+  cursor: pointer;
+}
+
+.commentItem .commentManage span:hover {
+  text-decoration: underline;
+}
+
+.commentItem p {
   font-size: 16px;
+  margin: 10px 0px;
 }
 
 .heartWrapper {
@@ -577,6 +608,7 @@ a {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px;
+  cursor: pointer;
 }
 
 /* 404 */
