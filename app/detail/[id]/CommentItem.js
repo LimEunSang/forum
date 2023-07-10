@@ -8,7 +8,7 @@ export default function CommentItem({ item, getData, session }) {
 
   const authorityCheck = () => {
     if (!session) return false;
-    return session.role === "admin" || session.user.email === item.author;
+    return session.role === "admin" || session.user.email === item.author.email;
   };
 
   const CommentManage = () => {
@@ -22,15 +22,17 @@ export default function CommentItem({ item, getData, session }) {
           수정
         </span>
         <span
-          onClick={() => {
+          onClick={(e) => {
             fetch(`/api/comment/delete?id=${item._id}`, { method: "DELETE" })
               .then((response) => {
                 if (response.status == 200) {
-                  document.getElementById("commentItem").style.opacity = 0;
+                  e.target.parentElement.parentElement.parentElement.style.opacity = 0;
                   setTimeout(() => {
-                    document.getElementById("commentItem").style.display =
+                    e.target.parentElement.parentElement.parentElement.style.display =
                       "none";
                   }, 1000);
+                  /* 위 코드 버그 발생.
+                     삭제하지 않은 엄한 놈한테 설정이 적용됨 */
                 }
               })
               .catch((error) => {
@@ -47,7 +49,9 @@ export default function CommentItem({ item, getData, session }) {
   return (
     <div className="commentItem" id="commentItem">
       <div className="wrapper">
-        <p className="author">{item.author}</p>
+        <p className="author">
+          {item.author.name} [{item.author.email}]
+        </p>
         {!isEdit && authorityCheck() && <CommentManage />}
       </div>
       {isEdit ? (

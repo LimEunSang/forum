@@ -16,7 +16,7 @@ export default async function handler(request, response) {
       const data = {
         comment: JSON.parse(request.body).comment,
         parent: new ObjectId(JSON.parse(request.body).parent),
-        author: session.user.email,
+        author: { email: session.user.email, name: session.user.name },
       };
 
       const client = await connectDB;

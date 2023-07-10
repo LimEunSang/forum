@@ -22,7 +22,7 @@ export default async function handler(request, response) {
       // 관리자, 작성자가 아닌 경우 수정 거부
       if (
         session.user.role != "admin" &&
-        session.user.email != findedComment.author
+        session.user.email != findedComment.author.email
       ) {
         return response.status(403).json();
       }

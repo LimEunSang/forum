@@ -11,13 +11,25 @@ export default async function handler(request, response) {
 
       const client = await connectDB;
       const db = client.db("forum");
+
+      const findedComment = await db
+        .collection("comment")
+        .findOne({ _id: new ObjectId(request.query.id) });
+
+      // 관리자, 작성자가 아닌 경우 삭제 거부
+      if (
+        session.user.role != "admin" &&
+        session.user.email != findedComment.author.email
+      ) {
+        return response.status(403).json();
+      }
+
       const result = await db.collection("comment").deleteOne({
         _id: new ObjectId(request.query.id),
       });
 
       return response.status(200).json();
     } catch (error) {
-      console.log(error);
       return response.status(500).json();
     }
   }

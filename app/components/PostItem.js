@@ -55,11 +55,13 @@ export default function PostItem({ object, user }) {
                 })
                   .then((response) => {
                     if (response.status == 200) {
-                      // e.target.parentElement.parentElement.parentElement.style.opacity = 0;
-                      document.getElementById("postItem").style.opacity = 0;
+                      e.target.parentElement.parentElement.parentElement.style.opacity = 0;
+                      // document.getElementById("postItem").style.opacity = 0;
                       setTimeout(() => {
-                        document.getElementById("postItem").style.display =
+                        e.target.parentElement.parentElement.parentElement.style.display =
                           "none";
+                        // document.getElementById("postItem").style.display =
+                        //   "none";
                       }, 1000);
                     }
                   })
