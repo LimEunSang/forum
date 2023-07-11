@@ -36,7 +36,7 @@ export default function CommentEdit({ item, setIsEdit, getData }) {
                   getData();
                   setIsEdit(false);
                   /* 위 코드 문제 발생.
-                     삭제 시 적용하는 스타일 적용 버그 때문에 이상하게 동작함 */
+                     이슈 #15 참조 */
                   // window.location.replace("/detail/" + item.parent);
                   /* 그렇다고 위와 같이 페이지를 자체를 새로고침하면 너무 비효율적임 */
                 }

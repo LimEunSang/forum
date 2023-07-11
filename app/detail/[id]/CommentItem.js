@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import $ from "jquery";
 import CommentEdit from "./CommentEdit";
 
 export default function CommentItem({ item, getData, session }) {
@@ -26,13 +27,12 @@ export default function CommentItem({ item, getData, session }) {
             fetch(`/api/comment/delete?id=${item._id}`, { method: "DELETE" })
               .then((response) => {
                 if (response.status == 200) {
-                  e.target.parentElement.parentElement.parentElement.style.opacity = 0;
+                  $(`#${item._id}`).css("opacity", "0");
                   setTimeout(() => {
-                    e.target.parentElement.parentElement.parentElement.style.display =
-                      "none";
+                    $(`#${item._id}`).css("display", "none");
                   }, 1000);
                   /* 위 코드 버그 발생.
-                     삭제하지 않은 엄한 놈한테 설정이 적용됨 */
+                     이슈 #15 참조 */
                 }
               })
               .catch((error) => {
@@ -47,7 +47,7 @@ export default function CommentItem({ item, getData, session }) {
   };
 
   return (
-    <div className="commentItem" id="commentItem">
+    <div className="commentItem" id={item._id}>
       <div className="wrapper">
         <p className="author">
           {item.author.name} [{item.author.email}]

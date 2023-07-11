@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import $ from "jquery";
 import { useRouter } from "next/navigation";
 import { timeForToday } from "../utils/timeForToday";
 
@@ -13,7 +14,7 @@ export default function PostItem({ object, user }) {
   };
 
   return (
-    <div className="postItem" id="postItem">
+    <div className="postItem" id={object._id}>
       <div
         className="contentBox"
         onClick={() => {
@@ -55,14 +56,12 @@ export default function PostItem({ object, user }) {
                 })
                   .then((response) => {
                     if (response.status == 200) {
-                      e.target.parentElement.parentElement.parentElement.style.opacity = 0;
-                      // document.getElementById("postItem").style.opacity = 0;
+                      $(`#${object._id}`).css("opacity", "0");
                       setTimeout(() => {
-                        e.target.parentElement.parentElement.parentElement.style.display =
-                          "none";
-                        // document.getElementById("postItem").style.display =
-                        //   "none";
+                        $(`#${object._id}`).css("display", "none");
                       }, 1000);
+                      /* 위 코드 버그 발생.
+                         이슈 #15 참조 */
                     }
                   })
                   .catch((error) => {
