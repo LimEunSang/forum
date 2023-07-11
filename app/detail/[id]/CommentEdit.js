@@ -35,10 +35,6 @@ export default function CommentEdit({ item, setIsEdit, getData }) {
                 if (response.status == 200) {
                   getData();
                   setIsEdit(false);
-                  /* 위 코드 문제 발생.
-                     이슈 #15 참조 */
-                  // window.location.replace("/detail/" + item.parent);
-                  /* 그렇다고 위와 같이 페이지를 자체를 새로고침하면 너무 비효율적임 */
                 }
               })
               .catch((error) => {

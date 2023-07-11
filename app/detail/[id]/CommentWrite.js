@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import $ from "jquery";
 
 export default function CommentWrite({ parent, getData, session }) {
   const router = useRouter();
@@ -29,12 +30,9 @@ export default function CommentWrite({ parent, getData, session }) {
                   .then((response) => {
                     if (response.status == 200) {
                       getData();
-                      document.getElementById("commentInput").value = "";
+                      // document.getElementById("commentInput").value = "";
+                      $("#commentInput").val(""); // jquery 사용하여 위 코드 작성
                       setComment("");
-                      /* 위 코드 문제 발생.
-                         이슈 #15 참조 */
-                      // window.location.replace("/detail/" + parent);
-                      /* 그렇다고 위와 같이 페이지를 새로고침하면 너무 비효율적임 */
                     }
                   })
                   .catch((error) => {

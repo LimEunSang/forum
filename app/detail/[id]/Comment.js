@@ -10,6 +10,7 @@ export default function Comment({ parent, session }) {
   const [loading, setLoading] = useState(true);
 
   const getData = () => {
+    setLoading(true); // 이 코드가 없으면 바보같이 동작함. 이유는 모르겠음.. [#15] 참고
     fetch(`/api/comment/list?parent=${parent}`)
       .then((response) => response.json())
       .then((data) => {

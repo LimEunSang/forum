@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import $ from "jquery";
 import CommentEdit from "./CommentEdit";
+import $ from "jquery";
 
 export default function CommentItem({ item, getData, session }) {
   const [isEdit, setIsEdit] = useState(false);
@@ -23,16 +23,17 @@ export default function CommentItem({ item, getData, session }) {
           수정
         </span>
         <span
-          onClick={(e) => {
+          onClick={() => {
             fetch(`/api/comment/delete?id=${item._id}`, { method: "DELETE" })
               .then((response) => {
                 if (response.status == 200) {
-                  $(`#${item._id}`).css("opacity", "0");
+                  // document.getElementById(item._id).style.opacity = 0;
+                  $(`#${item._id}`).css("opacity", "0"); // jquery 사용하여 위 코드 작성
                   setTimeout(() => {
-                    $(`#${item._id}`).css("display", "none");
+                    getData();
+                    /* $(`#${item._id}`).css("display", "none");
+                       위 코드를 사용하는 것보다 정직하지만 서버에 과부하를 줄 수 있음 */
                   }, 1000);
-                  /* 위 코드 버그 발생.
-                     이슈 #15 참조 */
                 }
               })
               .catch((error) => {
