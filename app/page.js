@@ -20,5 +20,5 @@ export default async function Home() {
     return object;
   });
 
-  return <PostList result={result} user={session && session.user} />;
+  return <PostList postList={result} user={session && session.user} />;
 }

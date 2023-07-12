@@ -15,8 +15,7 @@ const Detail = async (props) => {
     _id: new ObjectId(props.params.id),
   });
 
-  if (result === null) return notFound();
-
+  if (!result) return notFound();
   return (
     <div className="detail">
       <h1>{result.title}</h1>

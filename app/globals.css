@@ -474,13 +474,17 @@ a {
 }
 
 .postItem .infoBox .iconBtnBox .iconBtn {
-  padding: 4px;
-  border-radius: 45%;
+  padding: 5px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .postItem .infoBox .iconBtnBox .iconBtn:hover {
-  background-color: #ececec;
+  background-color: #eaeaea;
+}
+
+.darkMode .postItem .infoBox .iconBtnBox .iconBtn:hover {
+  background-color: #303030;
 }
 
 /* detail */

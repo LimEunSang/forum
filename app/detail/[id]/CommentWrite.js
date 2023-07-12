@@ -31,7 +31,7 @@ export default function CommentWrite({ parent, getData, session }) {
                     if (response.status == 200) {
                       getData();
                       // document.getElementById("commentInput").value = "";
-                      $("#commentInput").val(""); // jquery 사용하여 위 코드 작성
+                      $("#commentInput").val("");
                       setComment("");
                     }
                   })

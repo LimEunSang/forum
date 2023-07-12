@@ -28,11 +28,10 @@ export default function CommentItem({ item, getData, session }) {
               .then((response) => {
                 if (response.status == 200) {
                   // document.getElementById(item._id).style.opacity = 0;
-                  $(`#${item._id}`).css("opacity", "0"); // jquery 사용하여 위 코드 작성
+                  $(`#${item._id}`).css("opacity", "0");
                   setTimeout(() => {
-                    getData();
-                    /* $(`#${item._id}`).css("display", "none");
-                       위 코드를 사용하는 것보다 정직하지만 서버에 과부하를 줄 수 있음 */
+                    // document.getElementById(item._id).style.display = none;
+                    $(`#${item._id}`).css("display", "none");
                   }, 1000);
                 }
               })

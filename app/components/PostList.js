@@ -1,9 +1,9 @@
 import PostItem from "./PostItem";
 
-const PostList = ({ result, user }) => {
+const PostList = ({ postList, user }) => {
   return (
     <div className="postList">
-      {result.map((object, key) => (
+      {postList.map((object, key) => (
         <PostItem object={object} key={key} user={user} />
       ))}
     </div>
