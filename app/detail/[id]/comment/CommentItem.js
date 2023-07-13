@@ -3,14 +3,10 @@
 import { useState } from "react";
 import CommentEdit from "./CommentEdit";
 import $ from "jquery";
+import { canManage } from "@/app/utils/authCheck";
 
 export default function CommentItem({ item, session }) {
   const [isEdit, setIsEdit] = useState(false);
-
-  const authorityCheck = () => {
-    if (!session) return false;
-    return session.role === "admin" || session.user.email === item.author.email;
-  };
 
   const CommentManage = () => {
     return (
@@ -50,7 +46,7 @@ export default function CommentItem({ item, session }) {
         <p className="author">
           {item.author.name} [{item.author.email}]
         </p>
-        {!isEdit && authorityCheck() && <CommentManage />}
+        {!isEdit && canManage(session, item) && <CommentManage />}
       </div>
       {isEdit ? (
         <CommentEdit item={item} setIsEdit={setIsEdit} />

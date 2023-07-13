@@ -4,40 +4,36 @@ import Link from "next/link";
 import $ from "jquery";
 import { useRouter } from "next/navigation";
 import { timeForToday } from "../utils/timeForToday";
+import { canManage } from "@/app/utils/authCheck";
 
-export default function PostItem({ object, user }) {
+export default function PostItem({ item, session }) {
   const router = useRouter();
 
-  const authorityCheck = () => {
-    if (!user) return false;
-    return user.role == "admin" || user.email == object.author.email;
-  };
-
   return (
-    <div className="postItem" id={object._id}>
+    <div className="postItem" id={item._id}>
       <div
         className="contentBox"
         onClick={() => {
-          router.push("/detail/" + object._id);
+          router.push("/detail/" + item._id);
         }}
       >
-        {object.imgURL && (
-          <img className="thumbnail" src={object.imgURL} alt="thumbnail" />
+        {item.imgURL && (
+          <img className="thumbnail" src={item.imgURL} alt="thumbnail" />
         )}
-        <h4>{object.title}</h4>
+        <h4>{item.title}</h4>
       </div>
       <div className="infoBox">
         <div className="textBox">
-          <span>{object.author.name}</span>
+          <span>{item.author.name}</span>
           <span>•</span>
-          <span>{timeForToday(object.creationDate)}</span>
+          <span>{timeForToday(item.creationDate)}</span>
         </div>
-        {authorityCheck() && (
+        {canManage(session, item) && (
           <div className="iconBtnBox">
             <Link
               className="iconBtn"
               prefetch={false}
-              href={"/edit/" + object._id}
+              href={"/edit/" + item._id}
             >
               📝
             </Link>
@@ -45,23 +41,21 @@ export default function PostItem({ object, user }) {
               className="iconBtn"
               onClick={(e) => {
                 // s3 서버 업로드 된 이미지 삭제
-                object.imgURL &&
-                  fetch(`/api/post/image/?file=${object.imgURL}`, {
+                item.imgURL &&
+                  fetch(`/api/post/image/?file=${item.imgURL}`, {
                     method: "DELETE",
                   });
 
                 // 게시물 삭제
-                fetch("/api/post/delete/" + object._id, {
+                fetch("/api/post/delete/" + item._id, {
                   method: "DELETE",
                 })
                   .then((response) => {
                     if (response.status == 200) {
-                      $(`#${object._id}`).css("opacity", "0");
+                      $(`#${item._id}`).css("opacity", "0");
                       setTimeout(() => {
-                        $(`#${object._id}`).css("display", "none");
+                        $(`#${item._id}`).css("display", "none");
                       }, 1000);
-                      /* 위 코드 버그 발생.
-                         이슈 #15 참조 */
                     }
                   })
                   .catch((error) => {

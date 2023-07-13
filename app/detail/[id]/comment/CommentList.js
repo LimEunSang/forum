@@ -11,7 +11,7 @@ export default function CommentList({ parent, session }) {
   return (
     <div className="commentList">
       {data.map((item, key) => (
-        <CommentItem item={item} key={key} session={session} />
+        <CommentItem key={item._id} item={item} session={session} />
       ))}
     </div>
   );
