@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import $ from "jquery";
+import { useSWRConfig } from "swr";
 
-export default function CommentWrite({ parent, getData, session }) {
+export default function CommentWrite({ parent, session }) {
   const router = useRouter();
+  const { mutate } = useSWRConfig();
 
   const [comment, setComment] = useState("");
 
@@ -29,8 +31,7 @@ export default function CommentWrite({ parent, getData, session }) {
                 })
                   .then((response) => {
                     if (response.status == 200) {
-                      getData();
-                      // document.getElementById("commentInput").value = "";
+                      mutate(`/api/comment/list?parent=${parent}`);
                       $("#commentInput").val("");
                       setComment("");
                     }

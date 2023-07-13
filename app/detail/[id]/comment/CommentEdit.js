@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useSWRConfig } from "swr";
 
-export default function CommentEdit({ item, setIsEdit, getData }) {
+export default function CommentEdit({ item, setIsEdit }) {
+  const { mutate } = useSWRConfig();
+
   const [comment, setComment] = useState(item.comment);
 
   return (
@@ -33,7 +36,7 @@ export default function CommentEdit({ item, setIsEdit, getData }) {
             })
               .then((response) => {
                 if (response.status == 200) {
-                  getData();
+                  mutate(`/api/comment/list?parent=${item.parent}`);
                   setIsEdit(false);
                 }
               })

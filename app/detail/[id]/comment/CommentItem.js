@@ -4,7 +4,7 @@ import { useState } from "react";
 import CommentEdit from "./CommentEdit";
 import $ from "jquery";
 
-export default function CommentItem({ item, getData, session }) {
+export default function CommentItem({ item, session }) {
   const [isEdit, setIsEdit] = useState(false);
 
   const authorityCheck = () => {
@@ -27,10 +27,8 @@ export default function CommentItem({ item, getData, session }) {
             fetch(`/api/comment/delete?id=${item._id}`, { method: "DELETE" })
               .then((response) => {
                 if (response.status == 200) {
-                  // document.getElementById(item._id).style.opacity = 0;
                   $(`#${item._id}`).css("opacity", "0");
                   setTimeout(() => {
-                    // document.getElementById(item._id).style.display = none;
                     $(`#${item._id}`).css("display", "none");
                   }, 1000);
                 }
@@ -55,7 +53,7 @@ export default function CommentItem({ item, getData, session }) {
         {!isEdit && authorityCheck() && <CommentManage />}
       </div>
       {isEdit ? (
-        <CommentEdit item={item} setIsEdit={setIsEdit} getData={getData} />
+        <CommentEdit item={item} setIsEdit={setIsEdit} />
       ) : (
         <p className="content">{item.comment}</p>
       )}
