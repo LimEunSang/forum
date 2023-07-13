@@ -7,7 +7,7 @@ export default function LogoutBtn() {
     <span
       className="userMenuItem"
       onClick={() => {
-        signOut();
+        signOut({ callbackUrl: "/" });
       }}
     >
       로그아웃
