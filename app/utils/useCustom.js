@@ -13,3 +13,15 @@ export const useCommentList = (parent) => {
     isLoading,
   };
 };
+
+export const useCommentCount = (parent) => {
+  const { data, isLoading } = useSWR(
+    `/api/comment/count?parent=${parent}`,
+    fetcher
+  );
+
+  return {
+    count: data,
+    isLoading,
+  };
+};

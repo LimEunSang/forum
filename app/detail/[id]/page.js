@@ -1,11 +1,11 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
-import CommentWrite from "./comment/CommentWrite";
-import CommentList from "./comment/CommentList";
-import Heart from "./Heart";
-import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { notFound } from "next/navigation";
+import CommentWrite from "./comment/CommentWrite";
+import CommentList from "./comment/CommentList";
+import Sidebar from "./sidebar/Sidebar";
 
 const Detail = async (props) => {
   const session = await getServerSession(authOptions);
@@ -40,8 +40,8 @@ const Detail = async (props) => {
         <CommentList parent={result._id.toString()} session={session} />
       </div>
 
-      {/* 좋아요 */}
-      {session && <Heart parent={result._id.toString()} />}
+      {/* sidebar */}
+      <Sidebar parent={result._id.toString()} session={session} />
     </div>
   );
 };

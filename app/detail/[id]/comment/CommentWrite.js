@@ -32,6 +32,7 @@ export default function CommentWrite({ parent, session }) {
                   .then((response) => {
                     if (response.status == 200) {
                       mutate(`/api/comment/list?parent=${parent}`);
+                      mutate(`/api/comment/count?parent=${parent}`);
                       $("#commentInput").val("");
                       setComment("");
                     }

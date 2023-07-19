@@ -3,9 +3,12 @@
 import { useState } from "react";
 import CommentEdit from "./CommentEdit";
 import $ from "jquery";
+import { useSWRConfig } from "swr";
 import { canManage } from "@/app/utils/authCheck";
 
 export default function CommentItem({ item, session }) {
+  const { mutate } = useSWRConfig();
+
   const [isEdit, setIsEdit] = useState(false);
 
   const CommentManage = () => {
@@ -26,6 +29,7 @@ export default function CommentItem({ item, session }) {
                   $(`#${item._id}`).css("opacity", "0");
                   setTimeout(() => {
                     $(`#${item._id}`).css("display", "none");
+                    mutate(`/api/comment/count?parent=${item.parent}`);
                   }, 1000);
                 }
               })

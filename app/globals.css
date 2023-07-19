@@ -560,9 +560,21 @@ a {
   margin: 10px 0 0 8px;
 }
 
+.commentList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.commentList .text {
+  margin: 44px 0;
+  color: gray;
+  font-size: 20px;
+}
+
 .commentItem {
   width: 100%;
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   margin: 16px 0;
@@ -596,23 +608,36 @@ a {
   margin: 10px 0px;
 }
 
-.heartWrapper {
+.sidebar {
   position: absolute;
   left: -8rem;
   top: 6rem;
 }
 
-.fixed.heart {
+.sidebar .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.sidebar .fixed.wrapper {
   position: fixed;
   top: 130px;
 }
 
-.heart .heartBtn {
+.sidebar .component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.sidebar .icon {
   font-size: 32px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
+  padding: 0;
+  margin: 10px 10px 2px 10px;
 }
 
 /* 404 */

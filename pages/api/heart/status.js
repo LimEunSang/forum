@@ -7,7 +7,7 @@ export default async function handler(request, response) {
   if (request.method == "GET") {
     try {
       const session = await getServerSession(request, response, authOptions);
-      if (!session) return response.status(401).json();
+      if (!session) return response.status(200).json(null);
 
       const client = await connectDB;
       const db = client.db("forum");
