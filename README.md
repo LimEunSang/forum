@@ -37,3 +37,4 @@ This project is the lecture lab code for creating a bulletin board with Next.js 
 - *Dark Mode 기능 2* ➝ 오늘의 응용사항
   - mode에 따라 렌더링 하는 버튼 및 기능 구분
   - cookie 정보를 불러오는 코드 중복 간소화
+- 그 외 기능은 (closed) issue 참고
