@@ -515,6 +515,7 @@ a {
 .detail p {
   margin: 40px 0px, 20px; /* 위, 양 옆, 아래*/
   font-size: 18px;
+  white-space: pre-line;
 }
 
 .detail hr {
@@ -606,6 +607,10 @@ a {
 .commentItem p {
   font-size: 16px;
   margin: 10px 0px;
+}
+
+.commentItem .content {
+  white-space: pre-line;
 }
 
 .sidebar {
