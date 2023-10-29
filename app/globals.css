@@ -156,6 +156,10 @@ a {
 
 .header a {
   margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo {
@@ -163,8 +167,31 @@ a {
 }
 
 .darkMode .logo {
-  background-color: black;
   color: white;
+}
+
+.logo #text1 {
+  transition: transform 0.4s ease-in-out 0s;
+}
+
+.logo #text2 {
+  transition: transform 0.4s ease-in-out 0.1s;
+}
+
+.logo #text3 {
+  transition: transform 0.4s ease-in-out 0.2s;
+}
+
+.logo #text4 {
+  transition: transform 0.4s ease-in-out 0.3s;
+}
+
+.logo #text5 {
+  transition: transform 0.4s ease-in-out 0.4s;
+}
+
+.logo:hover span {
+  transform: translateY(-10px);
 }
 
 .mainMenu {
@@ -412,6 +439,7 @@ a {
   overflow: hidden;
   opacity: 1;
   transition: opacity 1s, display 1s, transform 0.5s, box-shadow 0.5s;
+  font-size: clamp(100%, 1vw, 115%);
 }
 
 .darkMode .postItem {
@@ -439,18 +467,19 @@ a {
   object-fit: cover;
 }
 
-.postItem .contentBox h4 {
-  height: 25%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 20px;
+.postItem .contentBox .title {
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* font-size: 20px; */
   font-weight: 800;
   margin: 0;
-  padding: 0px 12px;
+  padding: 12px;
 }
 
-.darkMode .postItem .contentBox h4 {
+.darkMode .postItem .contentBox .title {
   color: white;
 }
 

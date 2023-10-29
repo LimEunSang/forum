@@ -8,7 +8,7 @@ export default function Heart({ parent, session }) {
 
   // HeartBtn Component
   const HeartBtn = () => {
-    const btn = isHeart ? "💖" : "🩶";
+    const btn = isHeart ? "💖" : "🤍";
     const address = isHeart ? "delete" : "new";
     const method = isHeart ? "DELETE" : "POST";
 

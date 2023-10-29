@@ -22,11 +22,13 @@ export default async function RootLayout({ children }) {
       <body className={mode && mode.value == "dark" ? "darkMode" : ""}>
         <div className="container">
           <div className="header">
-            <div className="logoBox">
-              <Link className="logo" href="/">
-                Appleforum
-              </Link>
-            </div>
+            <Link className="logo" href="/">
+              <span id="text1">F</span>
+              <span id="text2">O</span>
+              <span id="text3">R</span>
+              <span id="text4">U</span>
+              <span id="text5">M</span>
+            </Link>
             <div className="mainMenu">
               <DarkModeBtn mode={mode && mode.value} />
               {session ? (

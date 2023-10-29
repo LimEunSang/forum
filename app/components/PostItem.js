@@ -20,12 +20,12 @@ export default function PostItem({ item, session }) {
         {item.imgURL && (
           <img className="thumbnail" src={item.imgURL} alt="thumbnail" />
         )}
-        <h4>{item.title}</h4>
+        <h4 className="title">{item.title}</h4>
       </div>
       <div className="infoBox">
         <div className="textBox">
           <span>{item.author.name}</span>
-          <span>•</span>
+          <span> • </span>
           <span>{timeForToday(item.creationDate)}</span>
         </div>
         {canManage(session, item) && (
