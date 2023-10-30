@@ -742,6 +742,12 @@ a {
     width: clamp(50%, 55%, 60%);
   }
 
+  /* wirte */
+
+  .writeForm {
+    width: 90%;
+  }
+
   /* post */
 
   .postList {
@@ -791,6 +797,12 @@ a {
 
   .register {
     width: clamp(30%, 40%, 50%);
+  }
+
+  /* wirte */
+
+  .writeForm {
+    width: 80%;
   }
 
   /* post */
