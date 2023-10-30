@@ -489,7 +489,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: clamp(90%, 1vw, 110%);
+  font-size: clamp(90%, 1vw, 100%);
 }
 
 .postItem .infoBox span {
@@ -739,44 +739,57 @@ a {
   /* post */
 
   .postList {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  /* detail */
+
+  .detail {
+    width: 100%;
   }
 
   /* sidebar */
 
   .sidebar {
-    /* 작성중 */
+    position: static;
   }
 
-  .sidebar .wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid gray;
-    border-radius: 10px;
-  }
-
+  .sidebar .wrapper,
   .sidebar .fixed.wrapper {
-    position: fixed;
-    top: 130px;
+    position: static;
+    flex-direction: row;
+    border: none;
   }
 
   .sidebar .component {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 5px;
+    flex-direction: row;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 0px 12px 0px 12px;
+    margin: 0 12px 0 0;
   }
 
   .sidebar .icon {
-    font-size: 32px;
-    padding: 0;
-    margin: 10px 10px 2px 10px;
+    font-size: 18px;
+    margin: 0px 12px 0px 0px;
+  }
+
+  .sidebar .count {
+    font-size: 14px;
   }
 }
 
 /* tablet */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+  /* post */
+
+  .postList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* PC */
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
   /* post */
 
   .postList {

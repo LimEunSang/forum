@@ -19,12 +19,11 @@ const Detail = async (props) => {
   if (!result) return notFound();
   return (
     <div className="detail">
-      {/* sidebar */}
-      <Sidebar parent={result._id.toString()} session={session} />
-      <div>수정중</div>
-
       {/* 제목 */}
       <h1>{result.title}</h1>
+
+      {/* sidebar */}
+      <Sidebar parent={result._id.toString()} session={session} />
 
       {/* 이미지 */}
       {result.imgURL && (
