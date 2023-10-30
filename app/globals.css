@@ -736,6 +736,12 @@ a {
 
 /* mobile */
 @media screen and (max-width: 767px) {
+  /* register */
+
+  .register {
+    width: clamp(50%, 55%, 60%);
+  }
+
   /* post */
 
   .postList {
@@ -781,6 +787,12 @@ a {
 
 /* tablet */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+  /* register */
+
+  .register {
+    width: clamp(30%, 40%, 50%);
+  }
+
   /* post */
 
   .postList {
